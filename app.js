@@ -32,15 +32,17 @@ app.use(function(req, res, next) {
     req.userLangPref = langPref;
 
     let ipAddr = req.headers["x-forwarded-for"];
-    if (ipAddr){
+    if (ipAddr) {
         var list = ipAddr.split(",");
         ipAddr = list[list.length-1];
-    } else {
-    ipAddr = req.connection.remoteAddress;
-  }
-  req.ip = ipAddr;
+    } 
+    else {
+        ipAddr = req.connection.remoteAddress;
+    }
+    
+    req.ipAddr = ipAddr;
 
-  mojammaa.log (
+    mojammaa.log (
       `New ${req.method} request with url: ${req.url}\nFrom: ${ipAddr}`, 
       mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, req.sessionID
     ); 

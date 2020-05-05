@@ -7,7 +7,7 @@ module.exports = (app, passport) => {
   app.get('/prayersTimes/all', (req, res) => {
     let prayersTimesApiRes = null;
     let prayerTimesApiUrl = 
-      `https://api.pray.zone/v2/times/today.json?ip=${req.ip}&school=4`;
+      `https://api.pray.zone/v2/times/today.json?ip=${req.ipAddr}&school=4`;
     
     console.log("=================", prayerTimesApiUrl, "======================");
     
