@@ -31,8 +31,17 @@ app.use(function(req, res, next) {
       req.cookies[mojammaa.config.cookies.names.userLangPref];
     req.userLangPref = langPref;
 
+    let ipAddr = req.headers["x-forwarded-for"];
+    if (ipAddr){
+        var list = ipAddr.split(",");
+        ipAddr = list[list.length-1];
+    } else {
+    ipAddr = req.connection.remoteAddress;
+  }
+  req.ip = ipAddr;
+
   mojammaa.log (
-      `New ${req.method} request with url: ${req.url}\nFrom: ${req.ip}`, 
+      `New ${req.method} request with url: ${req.url}\nFrom: ${ipAddr}`, 
       mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, req.sessionID
     ); 
   
