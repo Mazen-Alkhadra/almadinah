@@ -8,9 +8,7 @@ module.exports = (app, passport) => {
     let prayersTimesApiRes = null;
     let prayerTimesApiUrl = 
       `https://api.pray.zone/v2/times/today.json?ip=${req.ipAddr}&school=4`;
-    
-    console.log("=================", prayerTimesApiUrl, "======================");
-    
+       
     res.status(500);
   
     dbConnect.query (
@@ -37,7 +35,6 @@ module.exports = (app, passport) => {
           prayersTimesApiRes = results.datetime[0].times;
           for (prayer of prayers[0]) {
             let prayerApiTime = prayersTimesApiRes[prayer.apiKeyName] || '';
-            console.log(prayerApiTime);
             prayer.athanHour = prayerApiTime.substr(0, 2);
             prayer.athanMinut = prayerApiTime.substr(3, 2);
           }
@@ -52,7 +49,16 @@ module.exports = (app, passport) => {
             "app.get(/prayersTimes/all)",
             null, err
           );
-        }); 
+        });
+        
+        mojamma.log (
+          `Response from prayers api: ${prayerTimesApiUrl}\n`,
+          mojamma.logLevels.SERVER_API_INFO,
+          __filename,
+          "app.get(/prayersTimes/all)",
+          null, response
+        ); 
+        
       });
 
     });
