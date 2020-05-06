@@ -20,7 +20,7 @@ module.exports = (app, passport) => {
             );
             return;
           }
-          res.status(200).json(countries);
+          res.status(200).json(countries[0]);
       });
       
   });
@@ -29,7 +29,7 @@ module.exports = (app, passport) => {
       
     dbConnect.query(
       'CALL prcGetImsakiaCities(?);',
-      [req.userLangPref, req.params.countryId],
+      [[req.userLangPref, req.params.countryId]],
       (err, cities) => {
         if(err) {
           res.status(500).json();
@@ -42,7 +42,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(cities);
+        res.status(200).json(cities[0]);
     });
     
   });
@@ -51,7 +51,7 @@ module.exports = (app, passport) => {
       
     dbConnect.query(
       'CALL prcGetCityImsakiaImgs(?);',
-      [req.userLangPref, req.params.cityId],
+      [[req.userLangPref, req.params.cityId]],
       (err, imgs) => {
         if(err) {
           res.status(500).json();
@@ -64,7 +64,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(imgs);
+        res.status(200).json(imgs[0]);
     });
     
   });

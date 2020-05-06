@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(sections);
+        res.status(200).json(sections[0]);
     });
 
   });
@@ -27,7 +27,7 @@ module.exports = (app, passport) => {
   app.get('/doors/all/:sectionId', (req, res) => {
     dbConnect.query(
       'CALL prcGetSectionDoors(?);',
-      [req.userLangPref, req.params.sectionId],
+      [[req.userLangPref, req.params.sectionId]],
       (err, doors) => {
         if(err) {
           res.status(500).json();
@@ -40,7 +40,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(doors);
+        res.status(200).json(doors[0]);
     });
 
   });

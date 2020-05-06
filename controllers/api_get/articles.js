@@ -6,7 +6,7 @@ module.exports = (app, passport) => {
     const {FASTING_RULES} = mojamma.config.db.articlesCateg;
     dbConnect.query(
       'CALL prcGetCategoryArticles(?);',
-      [req.userLangPref, FASTING_RULES],
+      [[req.userLangPref, FASTING_RULES]],
       (err, articles) => {
         if(err) {
           res.status(500).json();
@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(articles);
+        res.status(200).json(articles[0]);
     });
 
   });
@@ -28,7 +28,7 @@ module.exports = (app, passport) => {
     const {QUARANTINE} = mojamma.config.db.articlesCateg;
     dbConnect.query(
       'CALL prcGetCategoryArticles(?);',
-      [req.userLangPref, QUARANTINE],
+      [[req.userLangPref, QUARANTINE]],
       (err, articles) => {
         if(err) {
           res.status(500).json();
@@ -41,7 +41,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(articles);
+        res.status(200).json(articles[0]);
     });
 
   });
@@ -50,7 +50,7 @@ module.exports = (app, passport) => {
 
     dbConnect.query(
       'CALL prcGetArticleContent(?);',
-      [req.userLangPref, req.params.idArticle],
+      [[req.userLangPref, req.params.idArticle]],
       (err, articles) => {
         if(err) {
           res.status(500).json();
@@ -63,7 +63,10 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(articles);
+        res.status(200).json({
+          paragraphs: articles[0],
+          txt: articles[1][0].txt
+        });
       });
 
   });

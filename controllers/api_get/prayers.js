@@ -36,14 +36,14 @@ module.exports = (app, passport) => {
           for (prayer of prayers[0]) {
             let prayerApiTime = prayersTimesApiRes[prayer.apiKeyName] || '';
             prayer.athanHour = prayerApiTime.substr(0, 2);
-            prayer.athanMinut = prayerApiTime.substr(3, 2);
+            prayer.athanMinutes = prayerApiTime.substr(3, 2);
           }
           res.status(200).json(prayers[0]);
         })
         .catch((err) => {
           res.status(500).end();
           mojamma.log (
-            `Error in fetch prayerTimes\n`,
+            `Error in fetch prayerTimes`,
             mojamma.logLevels.SERVER_API_ERR,
             __filename,
             "app.get(/prayersTimes/all)",
@@ -52,13 +52,13 @@ module.exports = (app, passport) => {
         });
         
         mojamma.log (
-          `Response from prayers api: ${prayerTimesApiUrl}\n`,
+          `Response from prayers api: ${prayerTimesApiUrl}`,
           mojamma.logLevels.SERVER_API_INFO,
           __filename,
           "app.get(/prayersTimes/all)",
           null, response
         ); 
-        
+
       });
 
     });

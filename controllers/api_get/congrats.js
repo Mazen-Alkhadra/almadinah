@@ -17,7 +17,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).json(imgs);
+        res.status(200).json(imgs[0]);
       });
       
   });

@@ -4,7 +4,7 @@ CREATE PROCEDURE `prcGetAllImsakiaCountries` (
 )
 BEGIN
     SELECT 
-        ct.IdCountry id, funGetString(ct.NameStrId, p_lang) name
+        DISTINCT ct.IdCountry id, funGetString(ct.NameStrId, p_lang) name
     FROM 
         imsakia i
         INNER JOIN cities c ON i.CityId = c.IdCity

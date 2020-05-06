@@ -7,7 +7,7 @@ module.exports = (app, passport) => {
     if(!req.body) {
       res.status(400).json({
         err: {
-          txt: getLocalozeStr(SIGNUP_INFO_NOT_FULL, req.userLangPref),
+          txt: getLocalozeStr('SIGNUP_INFO_NOT_FULL', req.userLangPref),
         }
       });
       return;
@@ -23,14 +23,28 @@ module.exports = (app, passport) => {
 
     dbConnect.query(
       'CALL prcSignUP(?);',
-      [firstName, lastName, email, password, null, birthDate, null, gender],
+      [[
+        firstName,
+        lastName,
+        email, 
+        password,
+        null,
+        birthDate,
+        null,
+        gender,
+        null, 
+        null, 
+        null, 
+        null
+      ]],
       (err) => {
         if(err) {
           res.status(400).json({
             err: {
-              txt: getLocalozeStr(SIGNUP_INFO_NOT_FULL, langPref),
+              txt: getLocalozeStr('SIGNUP_INFO_NOT_FULL', req.userLangPref),
             }
           });
+          
           mojamma.log (
             `Error in Execution SQL Query: ${this.sql}\n` + err.message,
             mojamma.logLevels.DB_ERR,
@@ -40,7 +54,7 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200).end();
+        res.status(200).json({});
     });
   });
 
@@ -48,7 +62,7 @@ module.exports = (app, passport) => {
     if(!req.body) {
       res.status(400).json({
         err: {
-          txt: getLocalozeStr(SIGNUP_INFO_NOT_FULL, req.userLangPref),
+          txt: getLocalozeStr('SIGNUP_INFO_NOT_FULL', req.userLangPref),
         }
       });
       return;
@@ -73,9 +87,10 @@ module.exports = (app, passport) => {
             txt: info.message
           }
         });
+        return;
       }
 
-      res.status(200).end();
-    });
+      res.status(200).json(user);
+    })(req, res);
   });
 };
