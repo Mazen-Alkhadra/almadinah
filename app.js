@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(function(req, res, next) {
     const langPref = 
       req.cookies[mojammaa.config.cookies.names.userLangPref];
-    req.userLangPref = +langPref;
+      req.userLangPref = +langPref || mojammaa.config.db.langs.english;
     
     let ipAddr = req.headers["x-forwarded-for"];
     if (ipAddr) {
@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
         ipAddr = req.connection.remoteAddress;
     }
     
-    req.ipAddr = ipAddr;
+    req.ipAddr = ipAddr.trim();
 
     mojammaa.log (
       `New ${req.method} request with url: ${req.url}\nFrom: ${ipAddr}`, 
