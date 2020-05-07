@@ -21,7 +21,19 @@ module.exports = (app, passport) => {
           );
           return;
         }
-       
+
+        fetchPrayerTimesFromAladan([...prayers[0]], req)
+        .then(prays => res.status(200).json(prays))
+        .catch(status => {
+          mojamma.log (
+            `Error in fetch from Aladan`,
+            mojamma.logLevels.SERVER_API_ERR,
+            __filename,
+            "app.get(/prayersTimes/all)",
+            null, status
+          );
+        });
+
         fetchPrayerTimesFromPrayZone([...prayers[0]], req)
         .then(prays => res.status(200).json(prays))
         .catch(status => {
@@ -33,18 +45,7 @@ module.exports = (app, passport) => {
             null, status
           );
         });
-
-        fetchPrayerTimesFromIslamicFinder([...prayers[0]], req)
-        .then(prays => res.status(200).json(prays))
-        .catch(status => {
-          mojamma.log (
-            `Error in fetch from islamic finder`,
-            mojamma.logLevels.SERVER_API_ERR,
-            __filename,
-            "app.get(/prayersTimes/all)",
-            null, status
-          );
-        });
+        
 
       
       });
@@ -91,32 +92,54 @@ const fetchPrayerTimesFromPrayZone = (dbPrays, req) => {
     });
 }
 
-const fetchPrayerTimesFromIslamicFinder = (dbPrays, req) => {
+const fetchPrayerTimesFromAladan = (dbPrays, req) => {
   let prayerTimesApiUrl = '';
-  const {alt, lon, lat} = req.query;
+  let {lon, lat, day, month, year} = req.query;
+  const now = new Date();
+  
+  day = +day || now.getDate();
+  month = +month || now.getMonth();
+  year = +year || now.getFullYear();
 
-  if(alt && lon && lat) 
-    prayerTimesApiUrl = `http://www.islamicfinder.us/index.php/api/prayer_times?latitude=${lat}&longitude=${lon}&user_ip=${req.ipAddr}&time_format=0&method=4`;
-  else
-    prayerTimesApiUrl = `http://www.islamicfinder.us/index.php/api/prayer_times?user_ip=${req.ipAddr}&time_format=0&method=4`;
+  if(!lon || !lat)
+    return Promise.reject(400);
 
+  prayerTimesApiUrl = 
+    `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=4&month=${month + 1}&year=${year}`;
+  
   return fetch(prayerTimesApiUrl)
     .then(response => {
       if(response.status < 200 || response.status >= 400)
         throw response.status;
       return response.json()
-        .then(({results}) => {
-          let prayersTimesApiRes = results;
+        .then(({data}) => {         
+          let prayersTimesApiRes = data[day - 1].timings;
+          let prayersOffsets = data[day - 1].meta.offset;
           for (prayer of dbPrays) {
             let prayerApiTime = prayersTimesApiRes[prayer.apiKeyName] || '';
+            let prayerApiOffset = parseInt(prayersOffsets[prayer.apiKeyName]);
             prayer.athanHour = prayerApiTime.substr(0, 2);
             prayer.athanMinutes = prayerApiTime.substr(3, 2);
+            if (prayerApiOffset) {
+              let athanMinutesInt = +prayer.athanMinutes;
+              let athanHourInt = +prayer.athanHour;
+
+              if (athanMinutesInt >= prayerApiOffset) {
+                prayer.athanMinutes =
+                  String(athanMinutesInt - prayerApiOffset);
+              }
+              else {
+                prayer.athanHour = String((athanHourInt || 12) - 1 );
+                prayer.athanMinutes = 
+                  String(athanMinutesInt + 60 - prayerApiOffset);
+              }
+            }
           }
           return dbPrays;
         })
         .catch((err) => {
           mojamma.log (
-            `Error in fetch from islamic finder`,
+            `Error in fetch from Aladan`,
             mojamma.logLevels.SERVER_API_ERR,
             __filename,
             "app.get(/prayersTimes/all)",
