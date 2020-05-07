@@ -32,22 +32,22 @@ module.exports = (app, passport) => {
             "app.get(/prayersTimes/all)",
             null, status
           );
-        });
-
-        fetchPrayerTimesFromPrayZone([...prayers[0]], req)
-        .then(prays => res.status(200).json(prays))
-        .catch(status => {
-          mojamma.log (
-            `Error in fetch from pray zone`,
-            mojamma.logLevels.SERVER_API_ERR,
-            __filename,
-            "app.get(/prayersTimes/all)",
-            null, status
-          );
-        });
-        
-
-      
+          throw status;
+        })
+        .catch(() => {
+          fetchPrayerTimesFromPrayZone([...prayers[0]], req)
+          .then(prays => res.status(200).json(prays))
+          .catch(status => {
+            mojamma.log (
+              `Error in fetch from pray zone`,
+              mojamma.logLevels.SERVER_API_ERR,
+              __filename,
+              "app.get(/prayersTimes/all)",
+              null, status
+            );
+          });
+        });  
+              
       });
 
   });
@@ -105,7 +105,7 @@ const fetchPrayerTimesFromAladan = (dbPrays, req) => {
     return Promise.reject(400);
 
   prayerTimesApiUrl = 
-    `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=4&month=${month + 1}&year=${year}`;
+    `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=4&month=${month + 1}&year=${year}&latitudeAdjustmentMethod=2`;
   
   return fetch(prayerTimesApiUrl)
     .then(response => {
