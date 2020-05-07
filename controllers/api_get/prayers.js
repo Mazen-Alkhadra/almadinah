@@ -125,14 +125,17 @@ const fetchPrayerTimesFromAladan = (dbPrays, req) => {
               let athanHourInt = +prayer.athanHour;
 
               if (athanMinutesInt >= prayerApiOffset) {
-                prayer.athanMinutes =
-                  String(athanMinutesInt - prayerApiOffset);
+                athanMinutesInt -= prayerApiOffset;
               }
               else {
-                prayer.athanHour = String((athanHourInt || 12) - 1 );
-                prayer.athanMinutes = 
-                  String(athanMinutesInt + 60 - prayerApiOffset);
+                athanHourInt = (athanHourInt || 12) - 1;
+                athanMinutesInt += 60 - prayerApiOffset;
+                prayer.athanHour =  athanHourInt < 10 ? '0' + athanHourInt :
+                  '' + athanHourInt;
               }
+              prayer.athanMinutes =
+                  athanMinutesInt < 10 ? '0' + athanMinutesInt :
+                    '' + athanMinutesInt
             }
           }
           return dbPrays;
