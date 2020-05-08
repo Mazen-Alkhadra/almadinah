@@ -23,7 +23,10 @@ module.exports = (app, passport) => {
         }
 
         fetchPrayerTimesFromAladan([...prayers[0]], req)
-        .then(prays => res.status(200).json(prays))
+        .then ( prays => {
+          setDefaultTimesForSunnaPrayers(prays);
+          res.status(200).json(prays);
+        })
         .catch(status => {
           mojamma.log (
             `Error in fetch from Aladan`,
@@ -36,7 +39,10 @@ module.exports = (app, passport) => {
         })
         .catch(() => {
           fetchPrayerTimesFromPrayZone([...prayers[0]], req)
-          .then(prays => res.status(200).json(prays))
+          .then ( prays => {
+            setDefaultTimesForSunnaPrayers(prays);
+            res.status(200).json(prays);
+          })
           .catch(status => {
             mojamma.log (
               `Error in fetch from pray zone`,
@@ -121,21 +127,7 @@ const fetchPrayerTimesFromAladan = (dbPrays, req) => {
             prayer.athanHour = prayerApiTime.substr(0, 2);
             prayer.athanMinutes = prayerApiTime.substr(3, 2);
             if (prayerApiOffset) {
-              let athanMinutesInt = +prayer.athanMinutes;
-              let athanHourInt = +prayer.athanHour;
-
-              if (athanMinutesInt >= prayerApiOffset) {
-                athanMinutesInt -= prayerApiOffset;
-              }
-              else {
-                athanHourInt = (athanHourInt || 12) - 1;
-                athanMinutesInt += 60 - prayerApiOffset;
-                prayer.athanHour =  athanHourInt < 10 ? '0' + athanHourInt :
-                  '' + athanHourInt;
-              }
-              prayer.athanMinutes =
-                  athanMinutesInt < 10 ? '0' + athanMinutesInt :
-                    '' + athanMinutesInt
+              removePrayerOffset(prayer, prayerApiOffset);
             }
           }
           return dbPrays;
@@ -151,4 +143,75 @@ const fetchPrayerTimesFromAladan = (dbPrays, req) => {
           throw err;
         });
     });
+}
+
+const removePrayerOffset = (prayer, offset) => {
+  let athanMinutesInt = +prayer.athanMinutes;
+  let athanHourInt = +prayer.athanHour;
+
+  if (athanMinutesInt >= offset) {
+    athanMinutesInt -= offset;
+  }
+  else {
+    athanHourInt = (athanHourInt || 24) - 1;
+    athanMinutesInt += 60 - offset;
+    prayer.athanHour = get2digitTimeStr(athanHourInt);
+  }
+
+  if(athanMinutesInt > 59) {
+    athanMinutesInt -= 60;
+    athanHourInt = athanHourInt === 23 ? 0 : athanHourInt + 1;
+    prayer.athanHour = get2digitTimeStr(athanHourInt);
+  }
+
+  prayer.athanMinutes = get2digitTimeStr(athanMinutesInt);
+}
+
+const setDefaultTimesForSunnaPrayers = (prayers) => {
+  let isha = null;
+  let sunRise = null;
+  let fajr = null;
+    
+  for (pray of prayers) {
+    // Assume that fajr & isha & sunrise will
+    // appear in array befor sunna prayers  
+
+    if(pray.apiKeyName === 'Isha')
+      isha = pray;
+    else if(pray.apiKeyName === 'Fajr')
+      fajr = pray;
+    else if(pray.apiKeyName === 'Sunrise')
+      sunRise = pray;
+    
+    if (!(fajr && isha && sunRise))
+      continue;
+
+    if(!pray.athanHour) {
+      switch(pray.apiKeyName) {
+        case 'Imsak': 
+          pray.athanHour = fajr.athanHour;
+          pray.athanMinutes = fajr.athanMinutes;
+          removePrayerOffset(pray, 10);
+          break;
+        case 'tahjd': 
+          pray.athanHour = '00';
+          pray.athanMinutes = '30';
+          break;
+        case 'Duha': 
+          pray.athanHour = sunRise.athanHour;
+          pray.athanMinutes = sunRise.athanMinutes;
+          removePrayerOffset(pray, -20);
+          break;
+        case 'Taraweeh': 
+          pray.athanHour = isha.athanHour;
+          pray.athanMinutes = isha.athanMinutes;
+          removePrayerOffset(pray, -20);
+          break;
+      }
+    }
+  }
+}
+
+const get2digitTimeStr = (time) => {
+  return time < 10 ? '0' + time : '' + time;
 }
