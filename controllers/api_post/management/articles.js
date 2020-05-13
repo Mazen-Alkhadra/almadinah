@@ -91,14 +91,12 @@ module.exports = (app) => {
         }
         
         let articleId = result[0].idArticle;
-
-        console.log(paragraphs);
+        console.log(articleId);
+        console.log(result);
+        
         paragraphs.forEach(paragraph => {
           if(!paragraph)
             return;
-          
-          console.log(paragraph);
-          console.log(articleId);
           
           paragraph.title = paragraph.title || null;
           paragraph.txt = paragraph.txt || null;
