@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
     mojammaa.log (
       `New ${req.method} request with url: ${req.url}\nFrom: ${ipAddr}`, 
-      mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, JSON.stringify(req.cookies)
+      mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, JSON.stringify(req.body)
     ); 
   
     res.on('finish', function() {
