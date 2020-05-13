@@ -23,7 +23,7 @@ module.exports = (app) => {
         return;
 
       paragraph.title = paragraph.title || null;
-      paragraph.title = paragraph.txt || null;
+      paragraph.txt = paragraph.txt || null;
 
       dbConnect.query(
         'CALL prcUpdateOrAddParagraph(?);',

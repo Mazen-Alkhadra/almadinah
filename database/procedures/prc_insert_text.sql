@@ -5,6 +5,7 @@ CREATE PROCEDURE `prcInsertText` (
     OUT out_str_id BIGINT(20) UNSIGNED
 )
 BEGIN
+
   SET out_str_id = NULL;
   
   IF p_lang IS NOT NULL THEN   
@@ -14,7 +15,5 @@ BEGIN
       CALL prcInsertString(NULL, p_text, out_str_id);
     END IF;
   END IF;
-
-  SELECT out_str_id AS IdString;
 
 END$$

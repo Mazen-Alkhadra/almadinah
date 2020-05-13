@@ -10,12 +10,10 @@ DECLARE Id_string BIGINT(20) UNSIGNED DEFAULT NULL;
 
     IF p_english_str IS NULL AND p_arabic_str IS NULL THEN 
         SET out_str_id = NULL;
-        SELECT NULL;
         LEAVE proc_label; 
     END IF;
 
     INSERT INTO strings VALUES (DEFAULT, p_english_str, p_arabic_str);
     SET out_str_id = LAST_INSERT_ID();
-    SELECT out_str_id as IdStr;
 
 END$$

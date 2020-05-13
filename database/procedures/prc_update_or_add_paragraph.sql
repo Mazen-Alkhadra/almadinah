@@ -12,6 +12,9 @@ BEGIN
   DECLARE txt_str_id BIGINT(20) UNSIGNED DEFAULT 
     (SELECT txtStrId FROM articles_paragraphs WHERE IdParagraph = p_paragraph_id);
 
+  SELECT title_str_id;
+  SELECT txt_str_id;
+  
   IF p_paragraph_title IS NOT NULL THEN 
     SET title_str_id = 
       funInsertOrUpdateText(p_lang, p_paragraph_title, title_str_id);   
