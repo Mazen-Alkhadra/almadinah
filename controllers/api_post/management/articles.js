@@ -92,16 +92,20 @@ module.exports = (app) => {
         
         let articleId = result[0].idArticle;
 
+        console.log(paragraphs);
         paragraphs.forEach(paragraph => {
           if(!paragraph)
             return;
-    
+          
+          console.log(paragraph);
+          console.log(articleId);
+          
           paragraph.title = paragraph.title || null;
           paragraph.txt = paragraph.txt || null;
     
           dbConnect.query(
             'CALL prcUpdateOrAddParagraph(?);',
-            [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
+            [[req.userLangPref, null, articleId, paragraph.title, paragraph.txt]],
             function(err) {
               if(err) {
                 res.status(500).end();
