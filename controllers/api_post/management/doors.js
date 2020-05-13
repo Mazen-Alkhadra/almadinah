@@ -10,6 +10,10 @@ module.exports = (app) => {
       doorId
     } = req.body;
     
+    displayName = displayName || null;
+    imageURI = imageURI || null;
+    sectionId = sectionId || null;
+    
     if(!doorId) {
       res.status(400).end();
       return;

@@ -7,10 +7,12 @@ CREATE PROCEDURE `prcUpdateArticle` (
 )  
 BEGIN
 
-  DECLARE title_str_id BIGINT(20) UNSIGNED DEFAULT NULL;
+  DECLARE title_str_id BIGINT(20) UNSIGNED DEFAULT 
+    (SELECT titleStrId FROM articles WHERE IdArticle = p_article_id);
 
   IF p_title IS NOT NULL THEN 
-    CALL prcInsertText(p_lang, p_title, title_str_id);
+    SET title_str_id = 
+      funInsertOrUpdateText(p_lang, p_title, title_str_id);   
   END IF;
 
   

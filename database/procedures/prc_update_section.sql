@@ -7,12 +7,12 @@ CREATE PROCEDURE `prcUpdateSection` (
 )
 BEGIN
 
-  DECLARE name_str_id BIGINT(20) UNSIGNED DEFAULT NULL;
+  DECLARE name_str_id BIGINT(20) UNSIGNED DEFAULT 
+    (SELECT NameStrId FROM sections WHERE IdSection = p_section_id);
 
-  IF p_display_name IS NOT NULL THEN 
-    CALL prcInsertText(p_lang, p_display_name, name_str_id);
+  IF p_display_name IS NOT NULL THEN
+    SET name_str_id = funInsertOrUpdateText(p_lang, p_display_name, name_str_id);
   END IF;
-
   
   UPDATE 
     sections 

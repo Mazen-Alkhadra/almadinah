@@ -10,6 +10,9 @@ module.exports = (app) => {
       imageURL
     } = req.body;
     
+    title = title || null;
+    imageURL = imageURL || null;
+
     if(!articleId) {
       res.status(400).end();
       return;
@@ -19,6 +22,9 @@ module.exports = (app) => {
       if(!paragraph)
         return;
 
+      paragraph.title = paragraph.title || null;
+      paragraph.title = paragraph.txt || null;
+      
       dbConnect.query(
         'CALL prcUpdateOrAddParagraph(?);',
         [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],

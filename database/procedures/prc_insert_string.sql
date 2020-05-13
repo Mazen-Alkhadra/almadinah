@@ -8,23 +8,14 @@ CREATE PROCEDURE `prcInsertString` (
 proc_label: BEGIN
 DECLARE Id_string BIGINT(20) UNSIGNED DEFAULT NULL;
 
-IF p_english_str IS NOT NULL THEN 
-    SET Id_string = (SELECT IdString FROM strings WHERE LOWER(EnglishString) = LOWER(p_english_str));
-ELSEIF p_arabic_str IS NOT NULL THEN 
-    SET Id_string = (SELECT IdString FROM strings WHERE LOWER(ArabicString) = LOWER(p_arabic_str));
-ELSE 
-    SET out_str_id = NULL;
-    SELECT NULL;
-    LEAVE proc_label; 
-END IF;
+    IF p_english_str IS NULL AND p_arabic_str IS NULL THEN 
+        SET out_str_id = NULL;
+        SELECT NULL;
+        LEAVE proc_label; 
+    END IF;
 
-IF Id_string IS NULL THEN 
     INSERT INTO strings VALUES (DEFAULT, p_english_str, p_arabic_str);
     SET out_str_id = LAST_INSERT_ID();
-    SELECT out_str_id as IdString;
-ELSE 
-    SET out_str_id = Id_string;
-    SELECT Id_string as IdString;
-END IF;
+    SELECT out_str_id as IdStr;
 
 END$$

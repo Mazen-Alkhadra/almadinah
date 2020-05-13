@@ -9,6 +9,9 @@ module.exports = (app) => {
       sectionId
     } = req.body;
     
+    displayName = displayName || null;
+    imageURI = imageURI || null;
+    
     if(!sectionId) {
       res.status(400).end();
       return;
