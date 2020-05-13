@@ -65,7 +65,7 @@ module.exports = (app) => {
   });
   
   app.post('/management/add/article/', (req, res) => {
-    const {
+    let {
       title, 
       paragraphs,
       imageURL
