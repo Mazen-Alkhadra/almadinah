@@ -3,7 +3,7 @@ const dbConnect = require('../../../database/connect');
 
 module.exports = (app) => {
   app.post('/management/update/door/', (req, res) => {
-    const {
+    let {
       displayName,
       imageURI,
       sectionId,
@@ -13,7 +13,7 @@ module.exports = (app) => {
     displayName = displayName || null;
     imageURI = imageURI || null;
     sectionId = sectionId || null;
-    
+
     if(!doorId) {
       res.status(400).end();
       return;

@@ -3,7 +3,7 @@ const dbConnect = require('../../../database/connect');
 
 module.exports = (app) => {
   app.post('/management/update/article/', (req, res) => {
-    const {
+    let {
       title, 
       paragraphs, 
       articleId, 
@@ -24,7 +24,7 @@ module.exports = (app) => {
 
       paragraph.title = paragraph.title || null;
       paragraph.title = paragraph.txt || null;
-      
+
       dbConnect.query(
         'CALL prcUpdateOrAddParagraph(?);',
         [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
