@@ -71,6 +71,9 @@ module.exports = (app) => {
       imageURL
     } = req.body;
     
+    title = title || null;
+    imageURL = imageURL || null;
+
     dbConnect.query (
       'CALL prcAddArticle(?, @out_article_id);',
       [[req.userLangPref, title, imageURL]],
@@ -92,6 +95,9 @@ module.exports = (app) => {
         paragraphs.forEach(paragraph => {
           if(!paragraph)
             return;
+    
+          paragraph.title = paragraph.title || null;
+          paragraph.txt = paragraph.txt || null;
     
           dbConnect.query(
             'CALL prcUpdateOrAddParagraph(?);',
