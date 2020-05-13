@@ -3,7 +3,7 @@ const dbConnect = require('../../../database/connect');
 
 module.exports = (app) => {
 
-  app.get('/management/sectios/all/', (req, res) => {
+  app.get('/management/sections/all/', (req, res) => {
     dbConnect.query(
       'CALL prcGetAllSections(?);',
       [req.userLangPref],
