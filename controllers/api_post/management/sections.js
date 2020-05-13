@@ -32,7 +32,7 @@ module.exports = (app) => {
           );
           return;
         }
-        res.status(200).end();
+        res.status(200).json();
     });
 
   });
@@ -59,7 +59,7 @@ module.exports = (app) => {
           );
           return;
         }
-        res.status(200).end();
+        res.status(200).json();
     });
   });
 };
