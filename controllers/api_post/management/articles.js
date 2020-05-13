@@ -1,0 +1,112 @@
+const mojamma = require('../../../bin/mojammaa');
+const dbConnect = require('../../../database/connect');
+
+module.exports = (app) => {
+  app.post('/management/update/article/', (req, res) => {
+    const {
+      title, 
+      paragraphs, 
+      articleId, 
+      imageURL
+    } = req.body;
+    
+    if(!articleId) {
+      res.status(400).end();
+      return;
+    }
+
+    paragraphs.forEach(paragraph => {
+      if(!paragraph)
+        return;
+
+      dbConnect.query(
+        'CALL prcUpdateOrAddParagraph(?);',
+        [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
+        (err) => {
+          if(err) {
+            res.status(500).end();
+            mojamma.log (
+              `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+              mojamma.logLevels.DB_ERR,
+              __filename,
+              "app.post(/management/update/article/)",
+              null, err
+            );
+            return;
+          }
+      });
+  
+    });
+
+    dbConnect.query(
+      'CALL prcUpdateArticle(?);',
+      [[req.userLangPref, title, imageURL, articleId]],
+      (err) => {
+        if(err) {
+          res.status(500).end();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/management/update/article/)",
+            null, err
+          );
+          return;
+        }
+        res.status(200).end();
+    });
+
+  });
+  
+  app.post('/management/add/article/', (req, res) => {
+    const {
+      title, 
+      paragraphs,
+      imageURL
+    } = req.body;
+    
+    dbConnect.query (
+      'CALL prcAddArticle(?, @out_article_id);',
+      [[req.userLangPref, title, imageURL]],
+      (err, result) => {
+        if(err) {
+          res.status(500).end();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/management/add/article/)",
+            null, err
+          );
+          return;
+        }
+        
+        let articleId = result[0].idArticle;
+
+        paragraphs.forEach(paragraph => {
+          if(!paragraph)
+            return;
+    
+          dbConnect.query(
+            'CALL prcUpdateOrAddParagraph(?);',
+            [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
+            (err) => {
+              if(err) {
+                res.status(500).end();
+                mojamma.log (
+                  `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+                  mojamma.logLevels.DB_ERR,
+                  __filename,
+                  "app.post(/management/add/article/)",
+                  null, err
+                );
+                return;
+              }
+          });
+        });   
+        
+        res.status(200).end();
+
+    });
+  });
+};

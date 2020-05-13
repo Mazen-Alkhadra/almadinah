@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Active`                BOOLEAN NOT NULL DEFAULT FALSE,
   `ActivationCode` 				varchar(100) NULL DEFAULT NULL,
   `ResetPassWordCode` 		varchar(100) NULL DEFAULT NULL,
-  `Role`                  SMALLINT NOT NULL DEFAULT 1, -- ['normal user']
+  `Role`                  SMALLINT NOT NULL DEFAULT 1, -- ['normal user, Admin']
   `CountryId`             INT(20) UNSIGNED NULL DEFAULT NULL,
   `CityId`                BIGINT(20) UNSIGNED NULL DEFAULT NULL,
   `Photo`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `doors` (
   `Visible`               BOOLEAN NOT NULL DEFAULT TRUE,
   `MobileAppKey`          VARCHAR(50) NULL DEFAULT NULL,
   `DisplayOrder`          SMALLINT(2) NULL DEFAULT NULL,
+  `ArticlesCategory`      SMALLINT(2) UNSIGNED NULL DEFAULT NULL, -- [FastingRules, Quarantine]
 
   PRIMARY KEY (`IdDoor`),
 

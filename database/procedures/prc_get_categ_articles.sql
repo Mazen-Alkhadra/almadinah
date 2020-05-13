@@ -5,9 +5,12 @@ CREATE PROCEDURE `prcGetCategoryArticles` (
 )
 BEGIN
     SELECT 
-        IdArticle id, funGetString(titleStrId, p_lang) title
+        IdArticle id,
+        funGetString(titleStrId, p_lang) title,
+        imgs.URL imgURL
     FROM 
         articles_categories ac
         INNER JOIN articles a ON a.IdArticle = ac.ArticleId AND ac.Category = p_category
+        LEFT JOIN imgs ON a.ImgId = imgs.IdImg
     ;
 END$$

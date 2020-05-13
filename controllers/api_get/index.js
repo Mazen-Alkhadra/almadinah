@@ -5,4 +5,5 @@ module.exports = (app, passport) => {
   require('./imsakia')(app, passport);
   require('./sections')(app, passport);
   require('./prayers')(app, passport);
+  require('./management')(app, passport);
 };

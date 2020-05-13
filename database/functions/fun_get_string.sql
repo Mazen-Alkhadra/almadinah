@@ -1,6 +1,5 @@
 DELIMITER $$
-CREATE DEFINER = 'scacade1_islamsk'
-FUNCTION `funGetString` (
+CREATE FUNCTION `funGetString` (
     p_str_id BIGINT(20) UNSIGNED,
     p_lang SMALLINT(2) UNSIGNED
 )
