@@ -90,10 +90,8 @@ module.exports = (app) => {
           return;
         }
         
-        let articleId = result[0].idArticle;
-        console.log(articleId);
-        console.log(result);
-        
+        let articleId = result[0][0].idArticle;
+                
         paragraphs.forEach(paragraph => {
           if(!paragraph)
             return;
