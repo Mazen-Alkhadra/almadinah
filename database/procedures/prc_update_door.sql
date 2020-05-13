@@ -9,7 +9,7 @@ CREATE PROCEDURE `prcUpdateDoor` (
 BEGIN
 
   DECLARE name_str_id BIGINT(20) UNSIGNED DEFAULT 
-    (SELECT NameStrId FROM sections WHERE IdSection = p_section_id);
+    (SELECT NameStrId FROM doors WHERE IdDoor = p_door_id);
 
   IF p_display_name IS NOT NULL THEN 
     SET name_str_id = funInsertOrUpdateText(p_lang, p_display_name, name_str_id);

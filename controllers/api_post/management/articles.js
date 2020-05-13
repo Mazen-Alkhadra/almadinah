@@ -28,7 +28,7 @@ module.exports = (app) => {
       dbConnect.query(
         'CALL prcUpdateOrAddParagraph(?);',
         [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
-        (err) => {
+        function (err) {
           if(err) {
             res.status(500).end();
             mojamma.log (
@@ -47,7 +47,7 @@ module.exports = (app) => {
     dbConnect.query(
       'CALL prcUpdateArticle(?);',
       [[req.userLangPref, title, imageURL, articleId]],
-      (err) => {
+      function (err) {
         if(err) {
           res.status(500).end();
           mojamma.log (
@@ -74,7 +74,7 @@ module.exports = (app) => {
     dbConnect.query (
       'CALL prcAddArticle(?, @out_article_id);',
       [[req.userLangPref, title, imageURL]],
-      (err, result) => {
+      function (err, result) {
         if(err) {
           res.status(500).end();
           mojamma.log (
@@ -96,7 +96,7 @@ module.exports = (app) => {
           dbConnect.query(
             'CALL prcUpdateOrAddParagraph(?);',
             [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
-            (err) => {
+            function(err) {
               if(err) {
                 res.status(500).end();
                 mojamma.log (

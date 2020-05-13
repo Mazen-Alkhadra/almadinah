@@ -9,7 +9,8 @@ BEGIN
         i.Url imageURI,
         MobileAppKey mobileAppKey,
         ArticlesCategory articlesCategory,
-        Visible visible
+        Visible visible,
+        SectionId sectionId
     FROM 
       doors d
       INNER JOIN imgs i ON i.IdImg = d.ImgId;
