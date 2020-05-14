@@ -132,8 +132,7 @@ INSERT INTO enum_fields VALUES
 	(DEFAULT, 'users', 'Role', 1, 'normal user')
     ,
  -- Type in categories 
-	(DEFAULT, 'articles_categories', 'Category', 1, 'FastingRules'),
-    (DEFAULT, 'articles_categories', 'Category', 1, 'QuarantineRules')
+	(DEFAULT, 'categories', 'Type', 1, 'articles'),
     
 
 -- --------------------------------------------------------------------------------------------
@@ -174,6 +173,13 @@ INSERT INTO articles_paragraphs VALUES
 (DEFAULT, 2, NULL, 4, 1),
 (DEFAULT, 5, NULL, 6, 1),
 (DEFAULT, 7, NULL, 8, 1)
+;
+
+CALL prcInsertString('Fasting Rules', 'أحكام الصيام',@temp1);
+CALL prcInsertString('Quarantine Rules', 'أحكام الحجر الصحي',@temp2);
+INSERT INTO categories VALUES 
+(DEFAULT, @temp1),
+(DEFAULT, @temp2)
 ;
 
 INSERT INTO articles_categories VALUES 

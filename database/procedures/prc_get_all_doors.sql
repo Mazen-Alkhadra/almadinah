@@ -8,7 +8,7 @@ BEGIN
         funGetString(NameStrId, p_lang) displayName,
         i.Url imageURI,
         MobileAppKey mobileAppKey,
-        ArticlesCategory articlesCategory,
+        ArticlesCategoryId articlesCategoryId,
         Visible visible,
         SectionId sectionId
     FROM 

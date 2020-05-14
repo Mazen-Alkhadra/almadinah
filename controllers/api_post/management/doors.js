@@ -7,12 +7,14 @@ module.exports = (app) => {
       displayName,
       imageURI,
       sectionId,
-      doorId
+      doorId,
+      articleCategoryId
     } = req.body;
     
     displayName = displayName || null;
     imageURI = imageURI || null;
     sectionId = sectionId || null;
+    articleCategoryId = articleCategoryId || null;
 
     if(!doorId) {
       res.status(400).end();
@@ -21,8 +23,8 @@ module.exports = (app) => {
 
     dbConnect.query(
       'CALL prcUpdateDoor(?);',
-      [[req.userLangPref, displayName, imageURI, sectionId, doorId]],
-      (err) => {
+      [[req.userLangPref, displayName, imageURI, sectionId, doorId,  articleCategoryId]],
+      function (err) {
         if(err) {
           res.status(500).end();
           mojamma.log (
@@ -43,13 +45,14 @@ module.exports = (app) => {
     const {
       displayName,
       imageURI,
-      sectionId
+      sectionId,
+      articleCategoryId
     } = req.body;
     
     dbConnect.query (
       'CALL prcAddDoor(?, @out_door_id);',
-      [[req.userLangPref, displayName, imageURI, sectionId]],
-      (err) => {
+      [[req.userLangPref, displayName, imageURI, sectionId, articleCategoryId]],
+      function (err) {
         if(err) {
           res.status(500).end();
           mojamma.log (

@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `doors` (
   `Visible`               BOOLEAN NOT NULL DEFAULT TRUE,
   `MobileAppKey`          VARCHAR(50) NULL DEFAULT NULL,
   `DisplayOrder`          SMALLINT(2) NULL DEFAULT NULL,
-  `ArticlesCategory`      SMALLINT(2) UNSIGNED NULL DEFAULT NULL, -- [FastingRules, Quarantine]
+  `ArticlesCategoryId`    INT(20) UNSIGNED NULL DEFAULT NULL,
 
   PRIMARY KEY (`IdDoor`),
 
@@ -201,6 +201,11 @@ CREATE TABLE IF NOT EXISTS `doors` (
   CONSTRAINT `FK_doors_imgs`
     FOREIGN KEY (`ImgId`)
     REFERENCES `imgs` (`IdImg`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_doors_articles_Categories`
+    FOREIGN KEY (`ArticlesCategoryId`)
+    REFERENCES `categories` (`IdCategory`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 )
@@ -282,11 +287,36 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `articles_categories` (
   `ArticleId`		          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Category`              SMALLINT(2) UNSIGNED NULL, -- [FastingRules, Quarantine]
+  `CategoryId`            INT(20) UNSIGNED NULL,
   
   CONSTRAINT `FK_category_articles`
     FOREIGN KEY (`ArticleId`)
     REFERENCES `articles` (`IdArticle`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_categories_articles`
+    FOREIGN KEY (`CategoryId`)
+    REFERENCES `categories` (`IdCategory`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+)
+
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table categories
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `categories` (
+  `IdCategory`	        INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `NameStrId`	          BIGINT(20) UNSIGNED NOT NULL,
+  `Type`                SMALLINT(2) NOT NULL, -- [articles]
+    
+  PRIMARY KEY (`IdCategory`),
+
+  CONSTRAINT `FK_categories_strings`
+    FOREIGN KEY (`NameStrId`)
+    REFERENCES `strings` (`IdStr`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 )

@@ -7,11 +7,13 @@ module.exports = (app) => {
       title, 
       paragraphs, 
       articleId, 
-      imageURL
+      imageURL,
+      articleCategoryId
     } = req.body;
     
     title = title || null;
     imageURL = imageURL || null;
+    articleCategoryId = articleCategoryId || null;
 
     if(!articleId) {
       res.status(400).end();
@@ -46,7 +48,7 @@ module.exports = (app) => {
 
     dbConnect.query(
       'CALL prcUpdateArticle(?);',
-      [[req.userLangPref, title, imageURL, articleId]],
+      [[req.userLangPref, title, imageURL, articleId, articleCategoryId]],
       function (err) {
         if(err) {
           res.status(500).end();
@@ -68,15 +70,17 @@ module.exports = (app) => {
     let {
       title, 
       paragraphs,
-      imageURL
+      imageURL,
+      articleCategoryId
     } = req.body;
     
     title = title || null;
     imageURL = imageURL || null;
+    articleCategoryId = articleCategoryId || null;
 
     dbConnect.query (
       'CALL prcAddArticle(?, @out_article_id);',
-      [[req.userLangPref, title, imageURL]],
+      [[req.userLangPref, title, imageURL, articleCategoryId]],
       function (err, result) {
         if(err) {
           res.status(500).end();

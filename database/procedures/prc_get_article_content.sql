@@ -6,6 +6,7 @@ CREATE PROCEDURE `prcGetArticleContent` (
 BEGIN
 
     SELECT 
+      IdParagraph id,
       funGetString(titleStrId, p_lang) title,
       funGetString(txtStrId, p_lang) txt
     FROM 

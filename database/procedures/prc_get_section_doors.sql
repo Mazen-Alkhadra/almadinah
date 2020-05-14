@@ -9,7 +9,7 @@ BEGIN
         funGetString(NameStrId, p_lang) displayName,
         i.Url imageURI,
         MobileAppKey mobileAppKey,
-        ArticlesCategory articlesCategory
+        ArticlesCategoryId articlesCategoryId
     FROM 
       doors d
       INNER JOIN imgs i ON i.IdImg = d.ImgId
