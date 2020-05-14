@@ -6,7 +6,7 @@ module.exports = (app) => {
   app.get('/management/categories/all/:typeNum', (req, res) => {
     dbConnect.query(
       'CALL prcGetAllCategories(?);',
-      [[req.userLangPref, typeNum]],
+      [[req.userLangPref, req.params.typeNum]],
       function (err, categories) {
         if (err) {
           res.status(500).json();
