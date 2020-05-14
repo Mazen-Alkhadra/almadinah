@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `titleStrId`	          BIGINT(20) UNSIGNED NOT NULL,
   `ImgId`                 BIGINT(20) UNSIGNED NULL,
   `txtStrId`              BIGINT(20) UNSIGNED NULL,
+  `Visible`               BOOLEAN NOT NULL DEFAULT TRUE,
   
   PRIMARY KEY (`IdArticle`),
 

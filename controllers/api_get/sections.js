@@ -5,7 +5,7 @@ module.exports = (app, passport) => {
 
   app.get('/section/all', (req, res) => {
     dbConnect.query(
-      'CALL prcGetAllSections(?);',
+      'CALL prcGetUserSections(?);',
       [req.userLangPref],
       (err, sections) => {
         if(err) {

@@ -8,7 +8,8 @@ module.exports = (app) => {
       imageURI,
       sectionId,
       doorId,
-      articleCategoryId
+      articleCategoryId,
+      visible
     } = req.body;
     
     displayName = displayName || null;
@@ -22,8 +23,15 @@ module.exports = (app) => {
     }
 
     dbConnect.query(
-      'CALL prcUpdateDoor(?);',
-      [[req.userLangPref, displayName, imageURI, sectionId, doorId,  articleCategoryId]],
+      'CALL prcUpdateDoor(?);', [[
+        req.userLangPref,
+        displayName,
+        imageURI,
+        sectionId,
+        doorId,
+        articleCategoryId,
+        visible
+      ]],
       function (err) {
         if(err) {
           res.status(500).end();

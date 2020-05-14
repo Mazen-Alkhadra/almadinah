@@ -4,7 +4,8 @@ CREATE PROCEDURE `prcUpdateArticle` (
   p_title LONGTEXT,
   p_img_url VARCHAR(500),
   p_article_id BIGINT(20) UNSIGNED,
-  p_article_categ_id INT(20) UNSIGNED
+  p_article_categ_id INT(20) UNSIGNED,
+  p_visible BOOLEAN
 )  
 BEGIN
 
@@ -21,7 +22,8 @@ BEGIN
     articles 
   SET 
     titleStrId = CASE WHEN title_str_id IS NOT NULL THEN title_str_id ELSE titleStrId END,
-    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END
+    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END,
+    Visible = CASE WHEN p_visible IS NOT NULL THEN p_visible ELSE Visible END
   WHERE 
     IdArticle = p_article_id;
 

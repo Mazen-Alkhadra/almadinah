@@ -7,7 +7,7 @@ CREATE FUNCTION `funInsertImg` (
 RETURNS BIGINT(20) UNSIGNED
 BEGIN
     DECLARE id_img BIGINT(20) UNSIGNED DEFAULT NULL;
-    SET id_img = (SELECT IdImg from imgs WHERE Url = p_url);
+    SET id_img = (SELECT IdImg from imgs WHERE Url = p_url LIMIT 1);
 
     IF id_img IS NULL THEN 
       INSERT INTO imgs (Url, Img, SizeInBytes) 

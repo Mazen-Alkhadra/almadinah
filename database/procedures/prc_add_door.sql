@@ -4,8 +4,8 @@ CREATE PROCEDURE `prcAddDoor` (
   p_display_name LONGTEXT,
   p_img_url VARCHAR(500),
   p_section_id BIGINT(20) UNSIGNED,
-  OUT out_door_id BIGINT(20) UNSIGNED,
-  p_article_categ_id INT(20) UNSIGNED
+  p_article_categ_id INT(20) UNSIGNED,
+  OUT out_door_id BIGINT(20) UNSIGNED
 )  
 BEGIN
 

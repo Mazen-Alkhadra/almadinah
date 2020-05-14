@@ -8,7 +8,8 @@ module.exports = (app) => {
       paragraphs, 
       articleId, 
       imageURL,
-      articleCategoryId
+      articleCategoryId,
+      visible
     } = req.body;
     
     title = title || null;
@@ -48,7 +49,7 @@ module.exports = (app) => {
 
     dbConnect.query(
       'CALL prcUpdateArticle(?);',
-      [[req.userLangPref, title, imageURL, articleId, articleCategoryId]],
+      [[req.userLangPref, title, imageURL, articleId, articleCategoryId, visible]],
       function (err) {
         if(err) {
           res.status(500).end();

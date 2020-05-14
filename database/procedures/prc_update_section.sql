@@ -3,7 +3,8 @@ CREATE PROCEDURE `prcUpdateSection` (
   p_lang SMALLINT(2) UNSIGNED,
   p_display_name LONGTEXT,
   p_img_url VARCHAR(500),
-  p_section_id BIGINT(20) UNSIGNED
+  p_section_id BIGINT(20) UNSIGNED,
+  p_visible BOOLEAN
 )
 BEGIN
 
@@ -18,7 +19,8 @@ BEGIN
     sections 
   SET 
     NameStrId = CASE WHEN name_str_id IS NOT NULL THEN name_str_id ELSE NameStrId END,
-    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END
+    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END,
+    Visible = CASE WHEN p_visible IS NOT NULL THEN p_visible ELSE Visible END
   WHERE 
     IdSection = p_section_id;
 

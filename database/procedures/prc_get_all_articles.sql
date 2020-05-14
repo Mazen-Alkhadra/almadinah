@@ -8,7 +8,8 @@ BEGIN
         IdArticle id,
         funGetString(titleStrId, p_lang) title,
         imgs.URL imgURL,
-        CategoryId articleCategoryId
+        CategoryId articleCategoryId,
+        Visible visible
     FROM 
         articles_categories ac
         RIGHT JOIN articles a ON a.IdArticle = ac.ArticleId

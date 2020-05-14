@@ -6,7 +6,8 @@ module.exports = (app) => {
     let {
       displayName,
       imageURI,
-      sectionId
+      sectionId,
+      visible
     } = req.body;
     
     displayName = displayName || null;
@@ -18,9 +19,14 @@ module.exports = (app) => {
     }
 
     dbConnect.query(
-      'CALL prcUpdateSection(?);',
-      [[req.userLangPref, displayName, imageURI, sectionId]],
-      (err) => {
+      'CALL prcUpdateSection(?);', [[
+        req.userLangPref,
+        displayName,
+        imageURI,
+        sectionId,
+        visible
+      ]],
+      function (err) {
         if(err) {
           res.status(500).end();
           mojamma.log (

@@ -12,5 +12,7 @@ BEGIN
         articles_categories ac
         INNER JOIN articles a ON a.IdArticle = ac.ArticleId AND ac.CategoryId = p_category_id
         LEFT JOIN imgs ON a.ImgId = imgs.IdImg
+    WHERE 
+        Visible = TRUE
     ;
 END$$
