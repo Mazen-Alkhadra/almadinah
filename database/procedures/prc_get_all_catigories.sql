@@ -12,6 +12,6 @@ BEGIN
     FROM 
         categories
     WHERE 
-      Type = p_type 
+      CASE WHEN p_type IS NOT NULL THEN Type = p_type ELSE TRUE END 
     ;
 END$$
