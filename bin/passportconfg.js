@@ -56,6 +56,7 @@ module.exports = function (passport) {
 		if (keys.length > 500) {
 			delete passport.cachUsers[keys[0]];
 		}
+		console.log('%%%%%%%%%% ', user);
 		passport.cachUsers[user.IdUser] = user;
 		done(null, user.IdUser);
 	});
@@ -82,6 +83,7 @@ module.exports = function (passport) {
 				passport.cachUsers[id] = usersRows[0];
 			}
 
+			console.log('&&&&&&&&&& ', err);
 			return done(err, passport.cachUsers[id]);
 		});
 	});
