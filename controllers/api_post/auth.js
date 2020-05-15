@@ -90,7 +90,15 @@ module.exports = (app, passport) => {
         return;
       }
       user.isAdmin = passport.isAdmin(user);
-      res.status(200).json(user);
+      req.login(user, function(err) {
+        if(err) {
+          res.status(500).json({});
+        }
+        else {
+          res.status(200).json(user);
+        }
+      });
+      
     })(req, res);
   });
 };
