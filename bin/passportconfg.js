@@ -63,7 +63,6 @@ module.exports = function (passport) {
 	});
 
 	passport.deserializeUser(function (req, id, done) {
-		console.log('deserializeUser ', user);
 		if (passport.cachUsers[id]) {
 			return done(null, passport.cachUsers[id]);
 		}
