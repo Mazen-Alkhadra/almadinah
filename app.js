@@ -57,7 +57,7 @@ app.use(function(req, res, next) {
     next(); 
 });
 
-//app.use('/management/*', passport.checkAdminRole)
+app.use('/management/*', passport.checkAdminRole)
 
 // configure passport for Authentication 
 require('./bin/passportconfg')(passport);
