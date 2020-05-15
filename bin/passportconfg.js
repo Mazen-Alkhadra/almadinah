@@ -113,9 +113,11 @@ module.exports = function (passport) {
 			return false;
 		}
 
-		if(next)
+		if(next) {
+			console.log('-----> ', next);
 			next(req, res);
-			
+		}
+
 		return true;
 	};
 

@@ -91,6 +91,7 @@ module.exports = (app, passport) => {
       }
       user.isAdmin = passport.isAdmin(user);
       req.login(user, function(err) {
+        console.log("-------------------", err);
         if(err) {
           res.status(500).json({});
         }
