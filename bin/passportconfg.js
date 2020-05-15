@@ -98,7 +98,7 @@ module.exports = function (passport) {
 		return true;
 	};
 
-	passport.checkAdminRole = function (req, res) {
+	passport.checkAdminRole = function (req, res, next) {
 		if (!req.isAuthenticated()) {
 			console.log('======== !req.isAuthenticated()');
 			if(res)
@@ -113,7 +113,9 @@ module.exports = function (passport) {
 			return false;
 		}
 
-		console.log('^^^^^^^^^^^^^^');
+		if(next)
+			next(req, res);
+			
 		return true;
 	};
 
