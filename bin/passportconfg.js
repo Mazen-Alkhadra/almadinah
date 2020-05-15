@@ -97,17 +97,20 @@ module.exports = function (passport) {
 
 	passport.checkAdminRole = function (req, res) {
 		if (!req.isAuthenticated()) {
+			console.log('======== !req.isAuthenticated()');
 			if(res)
 				res.status(401).end('You are not logged in / Registered');
 			return false;
 		}
 		
 		if(req.user.Role !== 2) {
+			console.log('************* !req.isAuthenticated()');
 			if(res)
 				res.status(401).end('Not Authorized');
 			return false;
 		}
 
+		console.log('^^^^^^^^^^^^^^');
 		return true;
 	};
 
