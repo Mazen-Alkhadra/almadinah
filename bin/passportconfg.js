@@ -56,9 +56,10 @@ module.exports = function (passport) {
 		
 		var keys = Object.keys(passport.cachUsers);
 		if (keys.length > 500) {
+			console.log('%%%%%%%%%%)))))))>>>', keys);
 			delete passport.cachUsers[keys[0]];
 		}
-		console.log('%%%%%%%%%% ', user);
+		console.log('%%%%%%%%%% ', passport.cachUsers);
 		passport.cachUsers[user.IdUser] = user;
 		done(null, user.IdUser);
 	});
