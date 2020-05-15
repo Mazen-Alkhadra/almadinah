@@ -4,7 +4,6 @@ const dbConnect = require('../database/connect');
 const mojammaa = require('./mojammaa');
 
 module.exports = function (passport) {
-	passport.cachUsers = {test: 1};
 
 	passport.use('logIn',
 		new localStrategy({
@@ -52,24 +51,10 @@ module.exports = function (passport) {
 	);
 
 	passport.serializeUser(function (req, user, done) {
-		console.log('serializeUser ', passport.cachUsers);
-		
-		// var keys = Object.keys(passport.cachUsers);
-		// if (keys.length > 500) {
-		// 	console.log('%%%%%%%%%%)))))))>>>', keys);
-		// 	delete passport.cachUsers[keys[0]];
-		// }
-		console.log('%%%%%%%%%% ', passport.cachUsers);
-		passport.cachUsers.mazen = 12;
-		passport.cachUsers[user.IdUser] = user;
 		done(null, user.IdUser);
 	});
 
 	passport.deserializeUser(function (req, id, done) {
-		console.log("^^^$$$$$>> ", passport.cachUsers);
-		if (passport.cachUsers[id]) {
-			return done(null, passport.cachUsers[id]);
-		}
 		var queryString =
 		 'SELECT * FROM users WHERE IdUser = ? AND Deleted = FALSE;';
 		
@@ -84,12 +69,7 @@ module.exports = function (passport) {
 				);
 			}
 
-			if (usersRows) {
-				passport.cachUsers[id] = usersRows[0];
-			}
-
-			console.log('&&&&&&&&&& ', passport.cachUsers);
-			return done(err, passport.cachUsers[id]);
+			return done(err, usersRows[0]);
 		});
 	});
 
@@ -104,24 +84,20 @@ module.exports = function (passport) {
 
 	passport.checkAdminRole = function (req, res, next) {
 		if (!req.isAuthenticated()) {
-			console.log('======== !req.isAuthenticated()');
 			if(res)
 				res.status(401).end('You are not logged in / Registered');
 			return false;
 		}
 		
 		if(!passport.isAdmin(req.user)) {
-			console.log('************* !this.isAdmin()');
 			if(res)
 				res.status(401).end('Not Authorized');
 			return false;
 		}
 
-		if(next) {
-			console.log('-----> ', next.toString());
+		if(next) 
 			next();
-		}
-
+			
 		return true;
 	};
 
