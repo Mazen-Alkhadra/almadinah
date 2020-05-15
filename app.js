@@ -57,10 +57,10 @@ app.use(function(req, res, next) {
     next(); 
 });
 
-app.use('/management/*', passport.checkAdminRole)
-
 // configure passport for Authentication 
 require('./bin/passportconfg')(passport);
+
+app.use('/management/*', passport.checkAdminRole)
 
 //API GET 
 require('./controllers/api_get')(app, passport);
