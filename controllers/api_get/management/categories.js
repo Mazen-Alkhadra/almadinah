@@ -4,6 +4,7 @@ const dbConnect = require('../../../database/connect');
 module.exports = (app) => {
 
   app.get('/management/categories/all', (req, res) => {
+    console.log("/management/categories/all", req.query);
     dbConnect.query(
       'CALL prcGetAllCategories(?);',
       [[req.userLangPref, req.query.typeNum]],
