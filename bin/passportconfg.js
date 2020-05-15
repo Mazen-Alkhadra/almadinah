@@ -60,6 +60,7 @@ module.exports = function (passport) {
 		// 	delete passport.cachUsers[keys[0]];
 		// }
 		console.log('%%%%%%%%%% ', passport.cachUsers);
+		passport.cachUsers.mazen = 12;
 		passport.cachUsers[user.IdUser] = user;
 		done(null, user.IdUser);
 	});
