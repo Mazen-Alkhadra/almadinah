@@ -106,7 +106,7 @@ module.exports = function (passport) {
 			return false;
 		}
 		
-		if(!this.isAdmin(req.user)) {
+		if(!passport.isAdmin(req.user)) {
 			console.log('************* !this.isAdmin()');
 			if(res)
 				res.status(401).end('Not Authorized');
