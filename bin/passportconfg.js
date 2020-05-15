@@ -103,8 +103,8 @@ module.exports = function (passport) {
 			return false;
 		}
 		
-		if(req.user.Role !== 2) {
-			console.log('************* !req.isAuthenticated()');
+		if(!this.isAdmin(req.user)) {
+			console.log('************* !this.isAdmin()');
 			if(res)
 				res.status(401).end('Not Authorized');
 			return false;
@@ -113,5 +113,9 @@ module.exports = function (passport) {
 		console.log('^^^^^^^^^^^^^^');
 		return true;
 	};
+
+	passport.isAdmin = function(user) {
+		return user.Role === 2;
+	}
 
 }
