@@ -40,7 +40,7 @@ mojammaa.config = {
   DBPoolConnLimit: 2,
   cookies: {
     names: {
-      userLangPref: 'langPref'
+      userLangPref: 'langpref'
     }
   },
   db: {
