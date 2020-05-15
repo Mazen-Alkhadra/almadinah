@@ -43,7 +43,8 @@ app.use(function(req, res, next) {
     req.ipAddr = ipAddr.trim();
 
     mojammaa.log (
-      `New ${req.method} request with url: ${req.url}\nFrom: ${ipAddr}\nBody: ${JSON.stringify(req.body)}`, 
+      `New ${req.method} request with url: ${req.url}` + 
+      `\nFrom: ${ipAddr}\nBody: ${JSON.stringify(req.body)}\nHeaders: ${JSON.stringify(req.headers)}`, 
       mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, JSON.stringify(req.cookies)
     ); 
   
