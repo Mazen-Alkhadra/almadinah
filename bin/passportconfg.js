@@ -115,7 +115,7 @@ module.exports = function (passport) {
 
 		if(next) {
 			console.log('-----> ', next.toString());
-			next(req, res);
+			next();
 		}
 
 		return true;
