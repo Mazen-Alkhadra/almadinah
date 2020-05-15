@@ -28,7 +28,7 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(function(req, res, next) {
     const langPref = 
-      req.cookies[mojammaa.config.cookies.names.userLangPref];
+      req.headers[mojammaa.config.cookies.names.userLangPref];
       req.userLangPref = +langPref || mojammaa.config.db.langs.english;
     
     let ipAddr = req.headers["x-forwarded-for"];
@@ -44,7 +44,8 @@ app.use(function(req, res, next) {
 
     mojammaa.log (
       `New ${req.method} request with url: ${req.url}` + 
-      `\nFrom: ${ipAddr}\nBody: ${JSON.stringify(req.body)}\nHeaders: ${JSON.stringify(req.headers)}`, 
+      `\nFrom: ${ipAddr}\nBody: ${JSON.stringify(req.body)}` +
+      `\nlangPref: ${req.userLangPref}\n`, 
       mojammaa.logLevels.SERVER_API_INFO, __filename, "app.use(/)", null, JSON.stringify(req.cookies)
     ); 
   
