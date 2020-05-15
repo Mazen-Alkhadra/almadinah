@@ -52,6 +52,7 @@ module.exports = function (passport) {
 	);
 
 	passport.serializeUser(function (req, user, done) {
+		console.log('serializeUser ', user);
 		var keys = Object.keys(passport.cachUsers);
 		if (keys.length > 500) {
 			delete passport.cachUsers[keys[0]];
@@ -62,6 +63,7 @@ module.exports = function (passport) {
 	});
 
 	passport.deserializeUser(function (req, id, done) {
+		console.log('deserializeUser ', user);
 		if (passport.cachUsers[id]) {
 			return done(null, passport.cachUsers[id]);
 		}
