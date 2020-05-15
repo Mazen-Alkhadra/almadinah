@@ -89,7 +89,7 @@ module.exports = (app, passport) => {
         });
         return;
       }
-
+      user.isAdmin = passport.checkAdminRole(req);
       res.status(200).json(user);
     })(req, res);
   });
