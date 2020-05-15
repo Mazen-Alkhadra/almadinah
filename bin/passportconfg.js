@@ -4,7 +4,7 @@ const dbConnect = require('../database/connect');
 const mojammaa = require('./mojammaa');
 
 module.exports = function (passport) {
-	passport.cachUsers = {};
+	passport.cachUsers = {test: 1};
 
 	passport.use('logIn',
 		new localStrategy({
@@ -65,7 +65,7 @@ module.exports = function (passport) {
 	});
 
 	passport.deserializeUser(function (req, id, done) {
-		console.log(passport.cachUsers);
+		console.log("^^^$$$$$>> ", passport.cachUsers);
 		if (passport.cachUsers[id]) {
 			return done(null, passport.cachUsers[id]);
 		}
