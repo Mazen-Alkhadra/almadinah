@@ -5,4 +5,6 @@ module.exports = (app, passport) => {
   require('./sections')(app);
   require('./categories')(app);
   require('./congrats')(app);
+  require('./countries')(app);
+
 }
