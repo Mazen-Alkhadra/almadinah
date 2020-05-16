@@ -57,7 +57,6 @@ module.exports = (app) => {
     dbConnect.query(
       'CALL prcAddImsakia(?, @out_imsakia_id);', [[
         req.userLangPref,
-        countryId,
         cityId,
         imgURL
       ]],
