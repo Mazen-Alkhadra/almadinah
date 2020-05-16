@@ -50,7 +50,7 @@ module.exports = (app) => {
     name = name || null;
   
     dbConnect.query(
-      'CALL prcAddCongrat(?);', [[
+      'CALL prcAddCongrat(?, @out_congrat_id);', [[
         req.userLangPref,
         name,
         imgURL
