@@ -4,5 +4,5 @@ module.exports = (app, passport) => {
   require('./imgs')(app);
   require('./sections')(app);
   require('./categories')(app);
-
+  require('./congrats')(app);
 }
