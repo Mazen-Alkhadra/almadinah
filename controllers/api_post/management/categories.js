@@ -3,7 +3,7 @@ const dbConnect = require('../../../database/connect');
 
 module.exports = (app) => {
   app.post('/management/add/category/', (req, res) => {
-    const {
+    let {
       displayName,
       type,
       imgURL
