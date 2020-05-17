@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE `prcAddImsakia`
+CREATE PROCEDURE `prcAddImsakia`(
   p_lang SMALLINT(2) UNSIGNED,
   p_city_id BIGINT(20) UNSIGNED,
   p_img_url VARCHAR(200),
@@ -9,8 +9,8 @@ BEGIN
 
   INSERT INTO 
     imsakia (
-      ImgId,
-      CityId
+      CityId,
+      ImgId
     )
   VALUES (
       p_city_id,

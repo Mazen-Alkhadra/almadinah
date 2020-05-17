@@ -8,10 +8,13 @@ BEGIN
     SELECT 
         IdCategory id,
         funGetString(NameStrId, p_lang) displayName,
-        Type type
+        Type type,
+        i.Url imageURL
     FROM 
         categories
+        INNER JOIN imgs i ON i.IdImg = c.ImgId
     WHERE 
       CASE WHEN p_type IS NOT NULL THEN Type = p_type ELSE TRUE END 
     ;
+    
 END$$

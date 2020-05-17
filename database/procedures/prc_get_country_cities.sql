@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE PROCEDURE `prcGetCountryCities` (
-    IN p_country_id INT(20) UNSIGNED,
-    IN p_lang SMALLINT(2) UNSIGNED
+    IN p_lang SMALLINT(2) UNSIGNED,
+    IN p_country_id INT(20) UNSIGNED
 )
 BEGIN
     SELECT 

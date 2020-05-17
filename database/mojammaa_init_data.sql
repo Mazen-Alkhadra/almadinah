@@ -133,6 +133,7 @@ INSERT INTO enum_fields VALUES
     ,
  -- Type in categories 
 	(DEFAULT, 'categories', 'Type', 1, 'articles'),
+    (DEFAULT, 'categories', 'Type', 2, 'congratulations'),
     
 
 -- --------------------------------------------------------------------------------------------

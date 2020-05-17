@@ -311,13 +311,19 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `categories` (
   `IdCategory`	        INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NameStrId`	          BIGINT(20) UNSIGNED NOT NULL,
-  `Type`                SMALLINT(2) NOT NULL, -- [articles]
-    
+  `Type`                SMALLINT(2) NOT NULL, -- [articles, congratulations]
+  `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+
   PRIMARY KEY (`IdCategory`),
 
   CONSTRAINT `FK_categories_strings`
     FOREIGN KEY (`NameStrId`)
     REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_categories_imgs`
+    FOREIGN KEY (`ImgId`)
+    REFERENCES `imgs` (`IdImg`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 )
@@ -360,6 +366,7 @@ CREATE TABLE IF NOT EXISTS `congrats` (
   `IdCongrat`		          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NameStrId`	            BIGINT(20) UNSIGNED NOT NULL,
   `ImgId`                 BIGINT(20) UNSIGNED NULL,
+  `CategoryId`            INT(20) UNSIGNED NULL DEFAULT NULL,
     
   PRIMARY KEY (`IdCongrat`),
 
@@ -372,7 +379,13 @@ CREATE TABLE IF NOT EXISTS `congrats` (
     FOREIGN KEY (`ImgId`)
     REFERENCES `imgs` (`IdImg`)
     ON DELETE RESTRICT
-    ON UPDATE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_categories_congrats`
+    FOREIGN KEY (`CategoryId`)
+    REFERENCES `categories` (`IdCategory`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+
 )
 
 ENGINE = InnoDB

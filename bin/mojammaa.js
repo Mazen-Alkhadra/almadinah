@@ -58,6 +58,10 @@ mojammaa.config = {
     articlesCateg: {
       FASTING_RULES: 1,
       QUARANTINE: 2
+    },
+    categoriesTypes: {
+      ARTICLES: 1,
+      CONGRATULATIONS: 2
     }
 
   }
