@@ -43,7 +43,7 @@ module.exports = (app) => {
     displayName = displayName || null;
 
     dbConnect.query (
-      'CALL prcUpdateCategory(?, @out_category_id);',
+      'CALL prcUpdateCategory(?);',
       [[req.userLangPref, displayName, type, imgURL, categoryId]],
       function (err) {
         if(err) {
