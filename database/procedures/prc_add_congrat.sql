@@ -3,6 +3,7 @@ CREATE PROCEDURE `prcAddCongrat` (
   p_lang SMALLINT(2) UNSIGNED,
   p_name LONGTEXT,
   p_img_url VARCHAR(500),
+  p_category_id INT(20) UNSIGNED,
   OUT out_congrat_id BIGINT(20) UNSIGNED
 )  
 BEGIN
@@ -16,11 +17,13 @@ BEGIN
   INSERT INTO 
     congrats (
       NameStrId, 
-      ImgId
+      ImgId,
+      CategoryId
     )
   VALUES (
       name_str_id, 
-      CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE NULL END
+      CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE NULL END,
+      p_category_id
   )
   ;
 

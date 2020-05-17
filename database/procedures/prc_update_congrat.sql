@@ -3,7 +3,8 @@ CREATE PROCEDURE `prcUpdateCongrat` (
   p_lang SMALLINT(2) UNSIGNED,
   p_name LONGTEXT,
   p_img_url VARCHAR(500),
-  p_congrat_id BIGINT(20) UNSIGNED
+  p_congrat_id BIGINT(20) UNSIGNED,
+  p_category_id INT(20) UNSIGNED
 )  
 BEGIN
 
@@ -18,7 +19,8 @@ BEGIN
     congrats 
   SET 
     NameStrId = CASE WHEN name_str_id IS NOT NULL THEN name_str_id ELSE NameStrId END,
-    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END
+    ImgId = CASE WHEN p_img_url IS NOT NULL THEN funInsertImg(p_img_url, NULL, NULL) ELSE ImgId END,
+    CategoryId = CASE WHEN p_category_id IS NOT NULL THEN p_category_id ELSE CategoryId END
   WHERE 
     IdCongrat = p_congrat_id;
 

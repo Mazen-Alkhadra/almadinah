@@ -6,12 +6,14 @@ module.exports = (app) => {
     let {
       imgURL,
       name,
-      congratId
+      congratId,
+      categoryId
     } = req.body;
     
     imgURL = imgURL || null;
     name = name || null;
-  
+    categoryId = categoryId || null;
+
     if(!congratId) {
       res.status(400).end();
       return;
@@ -22,7 +24,8 @@ module.exports = (app) => {
         req.userLangPref,
         name,
         imgURL,
-        congratId
+        congratId,
+        categoryId
       ]],
       function (err) {
         if(err) {
@@ -43,17 +46,20 @@ module.exports = (app) => {
   app.post('/management/add/congrat/', (req, res) => {
     let {
       imgURL,
-      name
+      name,
+      categoryId
     } = req.body;
     
     imgURL = imgURL || null;
     name = name || null;
+    categoryId = categoryId || null;
   
     dbConnect.query(
       'CALL prcAddCongrat(?, @out_congrat_id);', [[
         req.userLangPref,
         name,
-        imgURL
+        imgURL,
+        categoryId
       ]],
       function (err) {
         if(err) {

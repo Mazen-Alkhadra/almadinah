@@ -5,12 +5,15 @@ module.exports = (app) => {
   app.post('/management/add/category/', (req, res) => {
     const {
       displayName,
-      type
+      type,
+      imgURL
     } = req.body;
     
+    imgURL = imgURL || null;
+
     dbConnect.query (
       'CALL prcAddCategory(?, @out_category_id);',
-      [[req.userLangPref, displayName, type]],
+      [[req.userLangPref, displayName, type, imgURL]],
       function (err) {
         if(err) {
           res.status(500).end();

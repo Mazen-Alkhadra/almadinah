@@ -6,7 +6,8 @@ BEGIN
     SELECT 
        idCongrat id,
        funGetString(NameStrId, p_lang) AS name,
-       i.Url imageURL
+       i.Url imageURL,
+       CategoryId categoryId
     FROM 
         congrats c
         INNER JOIN imgs i ON i.IdImg = c.ImgId
