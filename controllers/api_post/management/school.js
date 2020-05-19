@@ -11,6 +11,9 @@ module.exports = (app) => {
       birthDate,
       mobile,
       active,
+      zipCode,
+      countryId,
+      cityId,
       registerId
     } = req.body;
     
@@ -20,6 +23,9 @@ module.exports = (app) => {
     gender = gender || null;
     birthDate = birthDate || null;
     mobile = mobile || null;
+    zipCode = zipCode || null;
+    countryId = countryId || null;
+    cityId = cityId || null;
 
     if(!registerId) {
       res.status(400).end();
@@ -33,10 +39,10 @@ module.exports = (app) => {
         email, 
         mobile,
         birthDate,
-        null,
+        zipCode,
         gender,
-        null, 
-        null, 
+        countryId, 
+        cityId, 
         active,
         registerId
       ]],
