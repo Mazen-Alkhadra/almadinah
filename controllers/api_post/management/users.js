@@ -20,7 +20,6 @@ module.exports = (app) => {
     gender = gender || null;
     birthDate = birthDate || null;
     mobile = mobile || null;
-    active = active || null;
 
     if(!userId) {
       res.status(400).end();
