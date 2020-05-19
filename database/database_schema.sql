@@ -422,6 +422,49 @@ CREATE TABLE IF NOT EXISTS `imsakia` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+
+-- -----------------------------------------------------
+-- Table `school_registers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `school_registers` (
+  `IdRegister`					  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `FirstName` 					  NVARCHAR(50) NOT NULL,
+  `LastName` 						  NVARCHAR(50) NOT NULL, 
+  `PersonalEmail` 			  NVARCHAR(50) NOT NULL UNIQUE,
+  `MobilePhone` 				  NVARCHAR(50) NULL DEFAULT NULL,
+  `BirthDate` 					  DATETIME NOT NULL,
+  `ZipCode` 						  NVARCHAR(50) NULL DEFAULT NULL,
+  `Gender` 							  SMALLINT(1) NOT NULL, -- [Male, Female]
+  `Active`                BOOLEAN NOT NULL DEFAULT FALSE,
+  `ActivationCode` 				varchar(100) NULL DEFAULT NULL,
+  `CountryId`             INT(20) UNSIGNED NULL DEFAULT NULL,
+  `CityId`                BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+  `Photo`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+  `RegisterTimestamp`     DATETIME NOT NULL DEFAULT current_timestamp(),
+  `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
+  `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,
+
+  PRIMARY KEY (`IdRegister`) ,
+  
+  CONSTRAINT `FK_school_reg_countries`
+    FOREIGN KEY (`CountryId` )
+    REFERENCES `countries` (`IdCountry` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_school_reg_cities`
+    FOREIGN KEY (`CityId` )
+    REFERENCES `cities` (`IdCity` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_school_reg_imgs`
+    FOREIGN KEY (`Photo` )
+    REFERENCES `imgs` (`IdImg` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 -- -- -----------------------------------------------------
 -- -- Table prayers_times
 -- -- -----------------------------------------------------
