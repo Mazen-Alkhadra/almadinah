@@ -443,7 +443,8 @@ CREATE TABLE IF NOT EXISTS `school_registers` (
   `RegisterTimestamp`     DATETIME NOT NULL DEFAULT current_timestamp(),
   `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
   `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,
-
+  `RegisterMessage`       NVARCHAR(2000) NULL DEFAULT NULL,
+  
   PRIMARY KEY (`IdRegister`) ,
   
   CONSTRAINT `FK_school_reg_countries`

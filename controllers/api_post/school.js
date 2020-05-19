@@ -18,7 +18,11 @@ module.exports = (app) => {
       lastName,
       gender,
       birthDate,
-      mobile
+      mobile,
+      countryId, 
+      cityId, 
+      zipCode,
+      message
     } = req.body;
 
     dbConnect.query(
@@ -29,11 +33,12 @@ module.exports = (app) => {
         email, 
         mobile,
         birthDate,
-        null,
+        zipCode,
         gender,
         null, 
-        null, 
-        null
+        countryId, 
+        cityId,
+        message
       ]],
       function (err) {
         if(err) {
