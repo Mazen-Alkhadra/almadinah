@@ -27,10 +27,17 @@ module.exports = (app) => {
 
       paragraph.title = paragraph.title || null;
       paragraph.txt = paragraph.txt || null;
+      paragraph.imageURL = paragraph.imageURL || null;
 
       dbConnect.query(
-        'CALL prcUpdateOrAddParagraph(?);',
-        [[req.userLangPref, paragraph.id, articleId, paragraph.title, paragraph.txt]],
+        'CALL prcUpdateOrAddParagraph(?);', [[
+          req.userLangPref,
+          paragraph.id,
+          articleId,
+          paragraph.title,
+          paragraph.txt,
+          paragraph.imageURL
+        ]],
         function (err) {
           if(err) {
             res.status(500).end();
@@ -103,10 +110,17 @@ module.exports = (app) => {
           
           paragraph.title = paragraph.title || null;
           paragraph.txt = paragraph.txt || null;
-    
+          paragraph.imageURL = paragraph.imageURL || null;
+
           dbConnect.query(
-            'CALL prcUpdateOrAddParagraph(?);',
-            [[req.userLangPref, null, articleId, paragraph.title, paragraph.txt]],
+            'CALL prcUpdateOrAddParagraph(?);', [[
+              req.userLangPref,
+              null,
+              articleId,
+              paragraph.title,
+              paragraph.txt,
+              paragraph.imageURL
+            ]],
             function(err) {
               if(err) {
                 res.status(500).end();
