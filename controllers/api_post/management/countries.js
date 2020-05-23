@@ -65,4 +65,74 @@ module.exports = (app) => {
         res.status(200).json({});
     });
   });
+
+  app.post('/management/cities/update', (req, res) => {
+    let {
+      name,
+      imgURL,
+      cityId
+    } = req.body;
+    
+    name = name || null;
+    imgURL = imgURL || null;
+        
+    if(!cityId) {
+      res.status(400).end();
+      return;
+    }
+
+    dbConnect.query(
+      'CALL prcUpdateCity(?);', [[
+        req.userLangPref,
+        name,
+        imgURL,
+        cityId
+      ]],
+      function (err) {
+        if(err) {
+          res.status(500).end();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/management/cities/update)",
+            null, err
+          );
+          return;
+        }
+        res.status(200).json({});
+    });
+
+  });
+  
+  app.post('/management/cities/add', (req, res) => {
+    const {
+      name,
+      imgURL,
+      countryId
+    } = req.body;
+    
+    if(!countryId) {
+      res.status(400).end();
+      return;
+    }
+
+    dbConnect.query (
+      'CALL prcAddCity(?, @out_city_id);',
+      [[req.userLangPref, name, imgURL, countryId]],
+      function (err) {
+        if(err) {
+          res.status(500).end();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/management/cities/add)",
+            null, err
+          );
+          return;
+        }
+        res.status(200).json({});
+    });
+  });
 };
