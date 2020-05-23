@@ -4,7 +4,10 @@ const getLocalozeStr = require('../../localize');
 
 module.exports = (app) => {
   app.post('/school/register', (req, res) => {
-    if(!req.body) {
+    if(!req.body ||
+      !req.body.firstName.trim() ||
+      !req.body.lastName.trim() || 
+      !req.body.email) {
       res.status(400).json({
         err: {
           txt: getLocalozeStr('SIGNUP_INFO_NOT_FULL', req.userLangPref),
