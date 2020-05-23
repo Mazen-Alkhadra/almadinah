@@ -18,9 +18,12 @@ module.exports = (app, passport) => {
       firstName,
       lastName,
       birthDate,
-      gender
+      gender,
+      countryId,
+      cityId,
+      zipCode
     } = req.body;
-
+    
     dbConnect.query(
       'CALL prcSignUP(?);',
       [[
@@ -30,12 +33,12 @@ module.exports = (app, passport) => {
         password,
         null,
         birthDate,
-        null,
+        zipCode,
         gender,
         null, 
         null, 
-        null, 
-        null
+        countryId, 
+        cityId
       ]],
       (err) => {
         if(err) {
