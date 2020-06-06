@@ -7,4 +7,5 @@ module.exports = (app, passport) => {
   require('./prayers')(app, passport);
   require('./countries')(app, passport);
   require('./management')(app, passport);
+  require('./views')(app, passport);
 };
