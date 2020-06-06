@@ -6,7 +6,7 @@ module.exports = (app, passport) => {
     fs.readFile('../../../views/privacy-policy/index.html',
     function (err, data) {
       if(err) {
-        res.status(500).end(err);
+        res.status(500).json(err);
         return;
       }
       res.end(data);
