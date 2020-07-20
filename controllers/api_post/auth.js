@@ -24,7 +24,8 @@ module.exports = (app, passport) => {
       gender,
       countryId,
       cityId,
-      zipCode
+      zipCode,
+      mobile
     } = req.body;
     
     dbConnect.query(
@@ -34,7 +35,7 @@ module.exports = (app, passport) => {
         lastName,
         email, 
         password,
-        null,
+        mobile || null,
         birthDate,
         zipCode,
         gender,
