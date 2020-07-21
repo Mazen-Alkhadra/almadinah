@@ -8,4 +8,5 @@ module.exports = (app, passport) => {
   require('./school')(app);
   require('./users')(app);
   require('./countries')(app);
+  require('./upload-img')(app);
 }

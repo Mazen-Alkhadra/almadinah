@@ -5,9 +5,11 @@ CREATE PROCEDURE `prcGetAllCountries` (
 BEGIN
     SELECT 
         IdCountry id, 
-        funGetString(NameStrId, p_lang) AS displayName
+        funGetString(NameStrId, p_lang) AS displayName,
+        i.Url imgURL
     FROM 
-        countries
+        countries c
+        LEFT JOIN imgs i ON i.IdImg = c.ImgId
     ORDER BY 
         displayName ASC
     ;

@@ -38,14 +38,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `countries` (
-  `IdCountry`		  INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `NameStrId`	BIGINT(20) UNSIGNED NOT NULL, 
-      
+  `IdCountry`		          INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `NameStrId`	            BIGINT(20) UNSIGNED NOT NULL, 
+  `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL, 
+
   PRIMARY KEY (`IdCountry`),
 
    CONSTRAINT `FK_countries_strings`
     FOREIGN KEY (`NameStrId`)
     REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_countries_imgs`
+    FOREIGN KEY (`ImgId` )
+    REFERENCES `imgs` (`IdImg` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 )
@@ -60,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `IdCity`		          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NameStrId`	          BIGINT(20) UNSIGNED NOT NULL, 
   `CountryId`           INT(20) UNSIGNED NOT NULL,
+  `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
       
   PRIMARY KEY (`IdCity`),
 
@@ -71,6 +78,11 @@ CREATE TABLE IF NOT EXISTS `cities` (
   CONSTRAINT `FK_cities_countries`
     FOREIGN KEY (`CountryId`)
     REFERENCES `countries` (`IdCountry`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_cities_imgs`
+    FOREIGN KEY (`ImgId` )
+    REFERENCES `imgs` (`IdImg` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
 )
@@ -341,7 +353,8 @@ CREATE TABLE IF NOT EXISTS `prayers` (
   `ImgId`                 BIGINT(20) UNSIGNED NULL,
   `DisplayOrder`          SMALLINT(2) NULL DEFAULT NULL,
   `ApiKeyName`            VARCHAR(50) NULL DEFAULT NULL,
-
+  `Visible`               BOOLEAN NOT NULL DEFAULT TRUE,
+  
   PRIMARY KEY (`IdPrayer`),
 
   CONSTRAINT `FK_prayers_strings`
@@ -444,6 +457,7 @@ CREATE TABLE IF NOT EXISTS `school_registers` (
   `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
   `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,
   `RegisterMessage`       NVARCHAR(2000) NULL DEFAULT NULL,
+  `IsMojammaaMember`      BOOLEAN NULL DEFAULT NULL,
   
   PRIMARY KEY (`IdRegister`) ,
   

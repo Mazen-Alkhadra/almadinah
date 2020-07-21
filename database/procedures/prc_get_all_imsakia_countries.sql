@@ -4,10 +4,13 @@ CREATE PROCEDURE `prcGetAllImsakiaCountries` (
 )
 BEGIN
     SELECT 
-        DISTINCT ct.IdCountry id, funGetString(ct.NameStrId, p_lang) name
+        DISTINCT ct.IdCountry id,
+        funGetString(ct.NameStrId, p_lang) name,
+        im.Url imgURL
     FROM 
         imsakia i
         INNER JOIN cities c ON i.CityId = c.IdCity
         INNER JOIN countries ct ON ct.IdCountry = c.CountryId
+        LEFT JOIN imgs im ON im.IdImg = ct.ImgId
     ;
 END$$

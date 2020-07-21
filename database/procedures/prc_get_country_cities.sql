@@ -6,9 +6,11 @@ CREATE PROCEDURE `prcGetCountryCities` (
 BEGIN
     SELECT 
         IdCity id,
-        funGetString(NameStrId, p_lang) AS displayName
+        funGetString(NameStrId, p_lang) AS displayName,
+        i.Url imgURL
     FROM 
-        cities    
+        cities c
+        LEFT JOIN imgs i ON i.IdImg = c.ImgId
     WHERE 
         CountryId = p_country_id
     ORDER BY 

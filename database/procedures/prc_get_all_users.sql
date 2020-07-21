@@ -9,7 +9,10 @@ BEGIN
       MobilePhone mobile,
       BirthDate birthDate, 			
       Gender gender, 					
-      Active active          
+      Active active,
+      CountryId countryId,
+      CityId cityId,
+      ZipCode zipCode        
     FROM 
         users
     ;

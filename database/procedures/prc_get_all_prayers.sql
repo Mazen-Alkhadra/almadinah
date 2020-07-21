@@ -9,6 +9,8 @@ BEGIN
       ApiKeyName apiKeyName
     FROM 
       prayers
+    WHERE 
+      Visible = true
     ORDER BY 
       DisplayOrder
     ;

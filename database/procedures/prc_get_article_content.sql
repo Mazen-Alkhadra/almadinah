@@ -8,9 +8,11 @@ BEGIN
     SELECT 
       IdParagraph id,
       funGetString(titleStrId, p_lang) title,
-      funGetString(txtStrId, p_lang) txt
+      funGetString(txtStrId, p_lang) txt,
+      i.Url imageURL
     FROM 
       articles_paragraphs ap
+      LEFT JOIN imgs i ON i.IdImg = ap.ImgId
     WHERE 
       ArticleId = p_artice_id
     ;

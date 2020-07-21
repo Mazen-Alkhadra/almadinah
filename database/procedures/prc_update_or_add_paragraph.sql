@@ -4,7 +4,8 @@ CREATE PROCEDURE `prcUpdateOrAddParagraph` (
   p_paragraph_id BIGINT(20) UNSIGNED,
   p_artice_id BIGINT(20) UNSIGNED,
   p_paragraph_title LONGTEXT,
-  p_paragraph_txt LONGTEXT
+  p_paragraph_txt LONGTEXT,
+  p_img_url VARCHAR(500)
 )
 BEGIN
   DECLARE title_str_id BIGINT(20) UNSIGNED DEFAULT
@@ -28,28 +29,42 @@ BEGIN
         articles_paragraphs 
       SET 
         titleStrId = title_str_id,
-        txtStrId = txt_str_id
+        txtStrId = txt_str_id,
+        ImgId = CASE WHEN p_img_url IS NULL THEN NULL ELSE funInsertImg(p_img_url, NULL, NULL) END
       WHERE 
         IdParagraph = p_paragraph_id;
     ELSEIF title_str_id IS NOT NULL THEN 
       UPDATE 
         articles_paragraphs 
       SET 
-        titleStrId = title_str_id
+        titleStrId = title_str_id,
+        ImgId = CASE WHEN p_img_url IS NULL THEN NULL ELSE funInsertImg(p_img_url, NULL, NULL) END
       WHERE 
         IdParagraph = p_paragraph_id;
     ELSEIF txt_str_id IS NOT NULL THEN
       UPDATE 
         articles_paragraphs 
       SET 
-        txtStrId = txt_str_id
+        txtStrId = txt_str_id,
+        ImgId = CASE WHEN p_img_url IS NULL THEN NULL ELSE funInsertImg(p_img_url, NULL, NULL) END
       WHERE 
         IdParagraph = p_paragraph_id;
     END IF;
   ELSE 
 
-    INSERT INTO articles_paragraphs (titleStrId, txtStrId, ArticleId) 
-    VALUES (title_str_id, txt_str_id, p_artice_id);
+    INSERT INTO 
+      articles_paragraphs (
+        titleStrId,
+        txtStrId,
+        ArticleId,
+        ImgId
+        ) 
+    VALUES (
+      title_str_id,
+      txt_str_id,
+      p_artice_id,
+      CASE WHEN p_img_url IS NULL THEN NULL ELSE funInsertImg(p_img_url, NULL, NULL) END
+    );
 
   END IF;
     

@@ -19,13 +19,15 @@ DECLARE new_user_id BIGINT(20) UNSIGNED;
 
 INSERT INTO users (
     FirstName, LastName, PersonalEmail, Password, MobilePhone,
-    BirthDate, ZipCode, Gender, ActivationCode, Role, CountryId, CityId
+    BirthDate, ZipCode, Gender, ActivationCode, Role, CountryId, CityId, 
+    Active
 )
 VALUES (
     p_FirstName, p_LastName, p_PersonalEmail, p_Password, p_MobilePhone,
     p_BirthDate, p_ZipCode, p_Gender, p_ActivationCode,
     CASE WHEN p_user_role IS NULL THEN 1 ELSE 2 END,
-    p_country_id, p_city_id
+    p_country_id, p_city_id, 
+    TRUE
 );
 
 SET new_user_id = LAST_INSERT_ID();
