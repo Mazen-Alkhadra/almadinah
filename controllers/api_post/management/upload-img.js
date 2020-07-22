@@ -4,14 +4,12 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' });
 
 module.exports = (app) => {
-  app.post('/upload/img', upload.single('avatar'), function(req, res) {
-    //console.log(req);
-    // upload.single('avatar')(req, res, function(err){
-    //   console.log(JSON.stringify(err));
-    //   console.log(req.file);
-    // })
+  app.post('/management/upload/img', upload.single('picture'), function(req, res) {
+
+    
+
 
     console.log(req.file);
-    res.status(200).end();
+    res.status(200).json({});
   });
 };
