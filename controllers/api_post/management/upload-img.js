@@ -8,7 +8,7 @@ module.exports = (app) => {
     console.log(req);
     upload.single('avatar')(req, res, function(err){
       console.log(JSON.stringify(err));
-      console.log(req.files);
+      console.log(req.file);
     })
   });
 };
