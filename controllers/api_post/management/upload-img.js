@@ -1,7 +1,7 @@
 const mojamma = require('../../../bin/mojammaa');
 const dbConnect = require('../../../database/connect');
 const multer  = require('multer')
-const upload = multer();
+const upload = multer({ dest: 'uploads/' });
 
 module.exports = (app) => {
   app.post('/upload/img', function(req, res) {
