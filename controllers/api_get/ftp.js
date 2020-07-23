@@ -17,10 +17,9 @@ module.exports = (app, passport) => {
           );
           return;
         }
-        res.status(200);
-        imgFileStram.pipe(res);
+        res.status(200).end(imgFileStram);
+        //imgFileStram.pipe(res);
         ftpClient.end();
-
       });
     });
 
