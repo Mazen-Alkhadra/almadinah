@@ -66,7 +66,8 @@ mojammaa.config = {
   },
   ftp: {
     host: 'ftp.scacademy.no',
-    user: 'anonymous@scacademy.no'
+    user: 'ss-6d5c52db07257210@scacademy.no',
+    password: 'mM@12345'
   }
 };
 

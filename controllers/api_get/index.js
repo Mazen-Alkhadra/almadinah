@@ -8,4 +8,5 @@ module.exports = (app, passport) => {
   require('./countries')(app, passport);
   require('./management')(app, passport);
   require('./views')(app, passport);
+  require('./ftp')(app, passport);
 };

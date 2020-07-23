@@ -18,6 +18,7 @@ module.exports = (app) => {
         "app.post(/management/upload/img)",
         null, err
       );
+      return;
     }
       const imgUrl = "ftp://" + mojamma.config.ftp.host + 
         '/' + req.file.originalname;
