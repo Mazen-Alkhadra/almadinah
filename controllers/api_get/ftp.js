@@ -20,19 +20,14 @@ module.exports = (app, passport) => {
 
         res.status(200);
         res.set('Content-Type', 'image/jpeg');
-        var data;
-        imgFileStram.on('data', function(chunck){
-          data += chunck;
-        });
-
+            
         imgFileStram.on('end', function(){
           res.end(data);
           ftpClient.end();
         });
 
-        //imgFileStram.pipe(res).on('end', function(){console.log("FINISHHHH");res.end();});
+        imgFileStram.pipe(res);
 
-        
       });
     });
 
