@@ -63,12 +63,11 @@ mojammaa.config = {
       ARTICLES: 1,
       CONGRATULATIONS: 2
     },
-    ftp: {
-      host: 'ftp.scacademy.no',
-      user: 'anonymous@scacademy.no'
-    }
+  },
+  ftp: {
+    host: 'ftp.scacademy.no',
+    user: 'anonymous@scacademy.no'
   }
-
 };
 
 mojammaa.runTimeValues.getWorkerForkCount = function () {

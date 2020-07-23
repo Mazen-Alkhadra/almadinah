@@ -48,11 +48,11 @@ module.exports = (app) => {
     });
   });
 
-  
+
   ftpClient.on('error', function(err){
     res.status(500).json({});
     mojamma.log (
-      `FTP Error:\n`,
+      `FTP Error`,
       mojamma.logLevels.SERVER_ERR,
       __filename,
       "app.post(/management/upload/img)",
