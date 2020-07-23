@@ -8,21 +8,62 @@ module.exports = (app) => {
   app.post('/management/upload/img', upload.single('picture'), function(req, res) {
   
   ftpClient.on('ready', function() {
-    console.log('FTP Ready');
   ftpClient.put(req.file.path, req.file.originalname, function(err) {
-    if (err) 
-      console.log(err);
+    if (err) {
+      res.status(500).json({});
+      mojamma.log (
+        `Error in upload img to ftp server\n` + err,
+        mojamma.logLevels.SERVER_ERR,
+        __filename,
+        "app.post(/management/upload/img)",
+        null, err
+      );
+    }
+      const imgUrl = "ftp://" + mojamma.config.ftp.host + 
+        '/' + req.file.originalname;
+      
+      dbConnect.query(
+        'SELECT funInsertImg(?);', [[
+          imgUrl,
+          null,
+          req.file.size
+        ]],
+        function (err) {
+
+          if(err) {
+            mojamma.log (
+              `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+              mojamma.logLevels.DB_ERR,
+              __filename,
+              "app.post(/management/upload/img)",
+              null, err
+            );
+            return;
+          }
+        });
+      
+      res.status(200).json({imgUrl});
 
       ftpClient.end();
     });
   });
-  ftpClient.connect({
-    host: 'ftp.scacademy.no',
-    user: 'ss-6d5c52db07257210@scacademy.no',
-    password: 'mM@12345'
+
+  
+  ftpClient.on('error', function(err){
+    res.status(500).json({});
+    mojamma.log (
+      `FTP Error:\n`,
+      mojamma.logLevels.SERVER_ERR,
+      __filename,
+      "app.post(/management/upload/img)",
+      null, err
+    );
+    return;
   });
 
-    console.log(req.file);
-    res.status(200).json({});
+  ftpClient.connect(mojamma.config.ftp);
+
+  console.log(req.file);
+
   });
 };

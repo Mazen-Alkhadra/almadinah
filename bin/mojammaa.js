@@ -62,8 +62,11 @@ mojammaa.config = {
     categoriesTypes: {
       ARTICLES: 1,
       CONGRATULATIONS: 2
+    },
+    ftp: {
+      host: 'ftp.scacademy.no',
+      user: 'anonymous@scacademy.no'
     }
-
   }
 
 };
