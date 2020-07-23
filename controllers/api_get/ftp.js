@@ -19,12 +19,18 @@ module.exports = (app, passport) => {
         }
 
         res.status(200);
-       imgFileStram.on('finish', function(){res.end();});
+        var data;
+        imgFileStram.on('data', function(chunck){
+          data += chunck;
+        });
 
-        imgFileStram.pipe(res).on('end', function(){console.log("FINISHHHH");res.end();});
-        //res.end();
+        imgFileStram.on('end', function(){
+          res.end(data);
+        });
 
-        ftpClient.end();
+        //imgFileStram.pipe(res).on('end', function(){console.log("FINISHHHH");res.end();});
+
+        //ftpClient.end();
       });
     });
 
