@@ -22,7 +22,7 @@ module.exports = (app, passport) => {
         res.set('Content-Type', 'image/jpeg');
             
         imgFileStram.on('end', function(){
-          res.end(data);
+          res.end();
           ftpClient.end();
         });
 
