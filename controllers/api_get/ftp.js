@@ -1,9 +1,9 @@
 const mojamma = require('../../bin/mojammaa');
-const ftpClient = new require('ftp')();
 
 module.exports = (app, passport) => {
 
   app.get('/ftp/img/:path', function (req, res) {
+    const ftpClient = new require('ftp')();
     ftpClient.on('ready', function () {
       ftpClient.get(req.params.path, function (err, imgFileStram) {
         if (err) {
@@ -31,7 +31,7 @@ module.exports = (app, passport) => {
 
         //imgFileStram.pipe(res).on('end', function(){console.log("FINISHHHH");res.end();});
 
-        //ftpClient.end();
+        ftpClient.end();
       });
     });
 
