@@ -21,7 +21,7 @@ module.exports = (app, passport) => {
         res.status(200);
        imgFileStram.on('finish', function(){res.end();});
 
-        imgFileStram.pipe(res);
+        imgFileStram.pipe(res).on('finish', function(){console.log("FINISHHHH");res.end();});
         //res.end();
 
         ftpClient.end();
