@@ -19,6 +19,7 @@ module.exports = (app, passport) => {
         }
 
         res.status(200);
+        res.set('Content-Type', 'image/jpeg');
         var data;
         imgFileStram.on('data', function(chunck){
           data += chunck;
