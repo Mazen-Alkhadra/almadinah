@@ -27,11 +27,12 @@ module.exports = (app, passport) => {
 
         imgFileStram.on('end', function(){
           res.end(data);
+          ftpClient.end();
         });
 
         //imgFileStram.pipe(res).on('end', function(){console.log("FINISHHHH");res.end();});
 
-        ftpClient.end();
+        
       });
     });
 
