@@ -17,9 +17,8 @@ module.exports = (app, passport) => {
           );
           return;
         }
-
+        res.status(200);
         imgFileStram.pipe(res);
-        //res.status(200).end();
         ftpClient.end();
 
       });
@@ -39,7 +38,7 @@ module.exports = (app, passport) => {
     });
 
     ftpClient.connect(mojamma.config.ftp);
-    
+
   });
 
 
