@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
         }
 
         res.status(200);
-        res.set('Content-Type', 'image/jpeg');
+        //res.set('Content-Type', 'image/jpeg');
             
         imgFileStram.on('end', function(){
           res.end();

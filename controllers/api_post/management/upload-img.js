@@ -20,8 +20,8 @@ module.exports = (app) => {
       );
       return;
     }
-      const imgUrl = "ftp://" + mojamma.config.ftp.host + 
-        '/' + req.file.originalname;
+      const imgUrl = mojamma.config.webSiteUrl + '/ftp/img/' + 
+        req.file.originalname;
       
       dbConnect.query(
         'SELECT funInsertImg(?);', [[
