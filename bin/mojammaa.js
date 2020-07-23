@@ -33,7 +33,7 @@ mojammaa.log = function (message, logLevel, fileName, functionName, className, m
 
 
 mojammaa.config = {
-  webSiteUrl: "",
+  webSiteUrl: "https://islamsk-mojammaa.herokuapp.com",
   accountActivationUrl: "",
   resetPasswordURL: "",
   maxWorkersNum: 5,
