@@ -38,7 +38,7 @@ connectionPool.on('connection', function (connection) {
       config.connectionLimit
     ]}`
   );
-  connection.query('SET @@SESSION.auto_increment_increment = 1;')
+  connection.query("SET @@SESSION.auto_increment_increment = 1; SET @@session.time_zone='+00:00';")
 });
 
 connectionPool.on('enqueue', function () {
