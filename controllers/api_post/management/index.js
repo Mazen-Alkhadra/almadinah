@@ -9,4 +9,5 @@ module.exports = (app, passport) => {
   require('./users')(app);
   require('./countries')(app);
   require('./upload-img')(app);
+  require('./notifications')(app);
 }
