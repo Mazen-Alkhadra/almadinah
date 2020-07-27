@@ -480,6 +480,64 @@ CREATE TABLE IF NOT EXISTS `school_registers` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table `notifications`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `IdNotification`	   		BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `TitleStrId` 					  BIGINT(20) UNSIGNED NULL,
+  `ContentStrId` 				  BIGINT(20) UNSIGNED NOT NULL, 
+  `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+  `CreatedDateTime`			  DATETIME NOT NULL DEFAULT current_timestamp(),
+  `TriggerDateTime`			  DATETIME NULL DEFAULT NULL,
+
+  PRIMARY KEY (`IdNotification`),
+  
+  CONSTRAINT `FK_notifies_strings_title`
+    FOREIGN KEY (`TitleStrId`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_notifies_strings_content`
+    FOREIGN KEY (`ContentStrId`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_notify_imgs`
+    FOREIGN KEY (`ImgId` )
+    REFERENCES `imgs` (`IdImg` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `notifications_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `notifications_users` (
+  `NotificationId`	   		BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `IsRead` 			          BOOLEAN NULL DEFAULT NULL,
+  `userId` 							  BIGINT(20) UNSIGNED  NULL,
+  `ReadDateTime`				  DATETIME NULL DEFAULT NULL,
+
+  PRIMARY KEY (`NotificationId`, `userId`),
+
+  CONSTRAINT `FK_notifies_`
+    FOREIGN KEY (`NotificationId`)
+    REFERENCES `notifications` (`IdNotification`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_notifies_user`
+    FOREIGN KEY (`userId`)
+    REFERENCES `users` (`IdUser`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 -- -- -----------------------------------------------------
 -- -- Table prayers_times
 -- -- -----------------------------------------------------
