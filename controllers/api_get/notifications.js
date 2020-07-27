@@ -7,7 +7,7 @@ module.exports = (app) => {
       
       dbConnect.query(
         'CALL prcGetAllUserNotifies(?);',
-        [[req.userLangPref, req.user.id]],
+        [[req.userLangPref, req.user.IdUser]],
         (err, notifies) => {
           if(err) {
             res.status(500).json();
@@ -29,7 +29,7 @@ module.exports = (app) => {
       
     dbConnect.query(
       'CALL prcGetUserUnReadNotifiesCnt(?);',
-      [req.user.id],
+      [req.user.IdUser],
       (err, result) => {
         if(err) {
           res.status(500).json();
@@ -42,9 +42,7 @@ module.exports = (app) => {
           );
           return;
         }
-        console.log(JSON.stringify(req.user));
-        console.log(JSON.stringify(result[0][0]));
-
+        
         res.status(200).json(result[0][0]);
     });
     
