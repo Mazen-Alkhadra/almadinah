@@ -42,6 +42,9 @@ module.exports = (app) => {
           );
           return;
         }
+        
+        console.log(JSON.stringify(result[0][0]));
+        
         res.status(200).json(result[0][0]);
     });
     
