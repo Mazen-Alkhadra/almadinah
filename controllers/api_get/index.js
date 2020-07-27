@@ -9,4 +9,5 @@ module.exports = (app, passport) => {
   require('./management')(app, passport);
   require('./views')(app, passport);
   require('./ftp')(app, passport);
+  require('./notifications')(app, passport);
 };
