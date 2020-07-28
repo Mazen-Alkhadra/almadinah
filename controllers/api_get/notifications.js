@@ -26,7 +26,6 @@ module.exports = (app) => {
   });
 
   app.get('/notifications/user/unread/count', (req, res) => {    
-      
     dbConnect.query(
       'CALL prcGetUserUnReadNotifiesCnt(?);',
       [req.user.IdUser],
@@ -44,8 +43,7 @@ module.exports = (app) => {
         }
         
         res.status(200).json(result[0][0]);
-    });
-    
+    });    
   });
 
 }

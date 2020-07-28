@@ -453,7 +453,7 @@ CREATE TABLE IF NOT EXISTS `school_registers` (
   `CountryId`             INT(20) UNSIGNED NULL DEFAULT NULL,
   `CityId`                BIGINT(20) UNSIGNED NULL DEFAULT NULL,
   `Photo`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
-  `RegisterTimestamp`     DATETIME NOT NULL DEFAULT current_timestamp(),
+  `RegisterTimestamp`     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
   `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,
   `RegisterMessage`       NVARCHAR(2000) NULL DEFAULT NULL,
@@ -488,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `TitleStrId` 					  BIGINT(20) UNSIGNED NULL,
   `ContentStrId` 				  BIGINT(20) UNSIGNED NOT NULL, 
   `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
-  `CreatedDateTime`			  DATETIME NOT NULL DEFAULT current_timestamp(),
+  `CreatedDateTime`			  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TriggerDateTime`			  DATETIME NULL DEFAULT NULL,
 
   PRIMARY KEY (`IdNotification`),
@@ -518,7 +518,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `notifications_users` (
   `NotificationId`	   		BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `IsRead` 			          BOOLEAN NULL DEFAULT NULL,
+  `IsRead` 			          BOOLEAN NOT NULL DEFAULT FALSE,
   `userId` 							  BIGINT(20) UNSIGNED  NULL,
   `ReadDateTime`				  DATETIME NULL DEFAULT NULL,
 

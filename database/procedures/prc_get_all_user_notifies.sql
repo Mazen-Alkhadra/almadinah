@@ -8,7 +8,8 @@ BEGIN
       IdNotification id,
       funGetString(TitleStrId, p_lang) title,
       funGetString(ContentStrId, p_lang) content,
-      im.Url imgURL
+      CreatedDateTime createdDateTime,
+      imgs.Url imgURL
     FROM 
       notifications n
       INNER JOIN notifications_users nu ON n.IdNotification = nu.NotificationId AND userId = p_UserId
