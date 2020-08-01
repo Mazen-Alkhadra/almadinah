@@ -61,7 +61,7 @@ function FcmMsg ( regToken, data, topic, condition,
     this.android.notification.color = notificationColor || "#ffffff";
     this.apns = { headers: { 'apns-priority': priority === 'normal' ? '5' : '10' } };
 
-    if(token)
+    if(regToken)
         this.token = regToken;
     if(data)
         this.data = data;
