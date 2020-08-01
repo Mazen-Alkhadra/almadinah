@@ -538,6 +538,24 @@ CREATE TABLE IF NOT EXISTS `notifications_users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table `firebase_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `firebase_users` (
+  `UserId`     			  BIGINT(20) UNSIGNED NOT NULL,
+  `SessionId`         varchar(128),
+  `InstanceId`        varchar(256) NOT NULL,
+
+  PRIMARY KEY (`UserId`, `SessionId`),
+
+  CONSTRAINT `FK_firebase_users`
+    FOREIGN KEY (`UserId` )
+    REFERENCES `users` (`IdUser` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 -- -- -----------------------------------------------------
 -- -- Table prayers_times
 -- -- -----------------------------------------------------

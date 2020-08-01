@@ -14,7 +14,9 @@ mojammaa.logLevels = {
   DB_ERR: 'Database Error',
   SERVER_ERR: 'Server Error',
   JOB_INFO: 'Job Info',
-  JOB_ERR: 'Job Error'
+  JOB_ERR: 'Job Error',
+  FCM_INFO: 'Fcm Info',
+  FCM_ERR: 'Fcm Error'
 };
 
 mojammaa.log = function (message, logLevel, fileName, functionName, className, moreInfo) {

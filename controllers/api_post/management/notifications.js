@@ -1,5 +1,6 @@
 const mojamma = require('../../../bin/mojammaa');
 const dbConnect = require('../../../database/connect');
+const pushNotificationTo = require('./push-notification');
 
 module.exports = (app) => {
   app.post('/management/add/assign/notification/', (req, res) => {
@@ -31,6 +32,7 @@ module.exports = (app) => {
           );
           return;
         }
+        pushNotificationTo(userId, {title, content, imgUrl});
         res.status(200).json({});
     });
   });

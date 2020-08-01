@@ -6,7 +6,7 @@ BEGIN
     UPDATE
       notifications_users
     SET 
-      IsRead = TRU,
+      IsRead = TRUE,
       ReadDateTime = UTC_TIMESTAMP()
     WHERE 
       userId = p_UserId     

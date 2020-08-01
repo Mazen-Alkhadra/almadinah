@@ -102,10 +102,56 @@ module.exports = (app, passport) => {
           res.status(500).json({});
         }
         else {
+          if (req.body.fcmToken) {
+            dbConnect.query(
+              'CALL prcAddUserInsId(?);',
+              [[req.user.IdUser, req.sessionID, req.body.fcmToken]],
+              function (err) {
+                if (err) {
+                  mojamma.log(
+                    `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+                    mojamma.logLevels.DB_ERR,
+                    __filename,
+                    "app.post(/user/logIn)",
+                    null, err
+                  );
+                  return;
+                }
+              });
+          }
+          
           res.status(200).json(user);
         }
       });
-      
     })(req, res);
+  });
+
+  app.post('/user/fcm/token', (req, res) => {
+    if(!passport.chekAuthority(req, res))
+      return;
+
+    if (!req.body.fcmToken) {
+      res.status(400).json({});
+      return;
+    }
+
+    dbConnect.query(
+      'CALL prcAddUserInsId(?);',
+      [[req.user.IdUser, req.sessionID, req.query.fcmToken]],
+      function (err) {
+        if (err) {
+          res.status(500).json({});
+          mojamma.log(
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/user/fcm/token)",
+            null, err
+          );
+          return;
+        }
+        res.status(200).json({});
+      }
+    );
   });
 };
