@@ -6,9 +6,9 @@ module.exports = (app, passport) => {
   app.get('/user/is_loggedin', (req, res) => {
 
     if (passport.chekAuthority(req, res)) {
+      user.isAdmin = passport.isAdmin(user);
       res.status(200).json(req.user);
     }
-    
   });
 
   app.get('/user/logout', (req, res) => {
