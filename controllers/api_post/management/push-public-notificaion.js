@@ -2,7 +2,7 @@ const mojamma = require('../../../bin/mojammaa');
 const dbConnect = require('../../../database/connect');
 const { FcmMsg, fcm } = require('../../../firebase');
 
-module.exports = function (userId, notification) {
+module.exports = function (notification) {
   return new Promise((resolve) => {
     dbConnect.query('CALL prcGetAllInsIds();', function (err, fbInfoRows) {
       if (err) {
