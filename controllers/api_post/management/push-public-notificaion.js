@@ -31,9 +31,12 @@ module.exports = function (notification) {
         return;
       }
 
-      fcmMsg.tokens = fbInfoRows;
+      fcmMsg.tokens = [];
+      fbInfoRows.forEach(
+        row => fcmMsg.tokens.push(row.InstanceId)
+      );
       
-      console.log('################\n', fbInfoRows);
+      console.log('################\n', fcmMsg.tokens);
 
       fcm.sendMulticast(fcmMsg)
         .then((response) => {
