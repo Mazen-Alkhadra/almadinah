@@ -490,7 +490,8 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `ImgId`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
   `CreatedDateTime`			  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TriggerDateTime`			  DATETIME NULL DEFAULT NULL,
-
+  `Type`                  SMALLINT(2) NOT NULL DEFAULT 1, -- [user-specific, public]
+ 
   PRIMARY KEY (`IdNotification`),
   
   CONSTRAINT `FK_notifies_strings_title`
@@ -553,6 +554,15 @@ CREATE TABLE IF NOT EXISTS `firebase_users` (
     REFERENCES `users` (`IdUser` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `firebase_guest_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `firebase_guest_users` (
+  `InstanceId`        varchar(256) NOT NULL
   )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

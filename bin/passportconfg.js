@@ -75,8 +75,10 @@ module.exports = function (passport) {
 
 	passport.chekAuthority = function (req, res) {
 		if (!req.isAuthenticated()) {
-			res.status(401);
-			res.end('You are not logged in / Registered');
+			if(res) {
+				res.status(401);
+				res.end('You are not logged in / Registered');
+			}
 			return false;
 		}
 		return true;

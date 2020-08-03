@@ -17,7 +17,7 @@ module.exports = (app) => {
     imgUrl = imgUrl || null;
 
     dbConnect.query (
-      'CALL prcAddNotification(?, @out_notification_id);\
+      'CALL prcAddNotification(?, NULL, @out_notification_id);\
        CALL prcAssignNotificationToUser(@out_notification_id, ?);',
       [[req.userLangPref, title, content, imgUrl], userId],
       function (err) {
@@ -37,6 +37,39 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/management/add/assign/notification/public', (req, res) => {
+    let {
+      title,
+      content,
+      imgUrl
+    } = req.body;
+    
+    title = title || null;
+    content = content || null;
+    imgUrl = imgUrl || null;
+
+    dbConnect.query (
+      'CALL prcAddNotification(?, @out_notification_id);\
+       CALL prcAssignNotificationToAllUsers(@out_notification_id);',
+      [[req.userLangPref, title, content, imgUrl,
+         mojamma.config.db.notifiesTypes.public]],
+      function (err) {
+        if(err) {
+          res.status(500).end();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.post(/management/add/assign/notification/public)",
+            null, err
+          );
+          return;
+        }
+        pushPublicNotification({title, content, imgUrl});
+        res.status(200).json({});
+    });
+  });
+
   app.post('/management/add/notification/', (req, res) => {
     let {
       title,
@@ -49,7 +82,7 @@ module.exports = (app) => {
     imgUrl = imgUrl || null;
     
     dbConnect.query (
-      'CALL prcAddNotification(?, @out_notification_id);',
+      'CALL prcAddNotification(?, NULL, @out_notification_id);',
       [[req.userLangPref, title, content]],
       function (err, result) {
         if(err) {

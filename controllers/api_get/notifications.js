@@ -1,13 +1,21 @@
 const mojamma = require('../../bin/mojammaa');
 const dbConnect = require('../../database/connect');
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
 
   app.get('/notifications/user/all', (req, res) => {    
       
+    let queryStr = 'CALL prcGetPublicNotifies(?);';
+    let queryData = [req.userLangPref];
+
+      if (passport.chekAuthority(req)) {
+        queryStr = 'CALL prcGetAllUserNotifies(?);';
+        queryData = [[req.userLangPref, req.user.IdUser]];
+      }
+
       dbConnect.query(
-        'CALL prcGetAllUserNotifies(?);',
-        [[req.userLangPref, req.user.IdUser]],
+        queryStr,
+        queryData,
         (err, notifies) => {
           if(err) {
             res.status(500).json();

@@ -65,6 +65,10 @@ mojammaa.config = {
       ARTICLES: 1,
       CONGRATULATIONS: 2
     },
+    notifiesTypes: {
+      userSpecific: 1,
+      public: 2
+    }
   },
   ftp: {
     host: 'ftp.scacademy.no',
