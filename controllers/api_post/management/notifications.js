@@ -1,6 +1,7 @@
 const mojamma = require('../../../bin/mojammaa');
 const dbConnect = require('../../../database/connect');
 const pushNotificationTo = require('./push-notification');
+const pushPublicNotification = require('./push-public-notificaion');
 
 module.exports = (app) => {
   app.post('/management/add/assign/notification/', (req, res) => {
