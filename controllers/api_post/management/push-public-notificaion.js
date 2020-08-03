@@ -33,6 +33,8 @@ module.exports = function (notification) {
 
       fcmMsg.tokens = fbInfoRows;
       
+      console.log('################\n', fbInfoRows);
+
       fcm.sendMulticast(fcmMsg)
         .then((response) => {
           mojamma.log(
