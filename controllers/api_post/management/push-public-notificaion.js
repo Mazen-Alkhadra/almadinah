@@ -8,7 +8,7 @@ module.exports = function (notification) {
       if (err) {
         mojamma.log(
           `Error in execution sql query: ${this.sql}` + err.message,
-          lyfeup.logLevels.DB_ERR, __filename,
+          mojamma.logLevels.DB_ERR, __filename,
           "pushPublicNotification", null, err
         );
         return;
@@ -45,7 +45,7 @@ module.exports = function (notification) {
         .catch((error) => {
           mojamma.log(
             `Error sending message: ${error}`,
-            lyfeup.logLevels.FCM_ERR, __filename,
+            mojamma.logLevels.FCM_ERR, __filename,
             "pushPublicNotification", null
           );
           resolve({ status: 514 });
