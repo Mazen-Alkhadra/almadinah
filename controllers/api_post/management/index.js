@@ -10,4 +10,5 @@ module.exports = (app, passport) => {
   require('./countries')(app);
   require('./upload-img')(app);
   require('./notifications')(app);
+  require('./prayers-times')(app);
 }

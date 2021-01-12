@@ -435,6 +435,37 @@ CREATE TABLE IF NOT EXISTS `imsakia` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table prayers_times
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `prayers_times` (
+  `IdPrayerTime`		      BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `NameStrId`	            BIGINT(20) UNSIGNED NULL,
+  `ImgId`                 BIGINT(20) UNSIGNED NULL,
+  `CityId`                BIGINT(20) UNSIGNED NULL,
+    
+  PRIMARY KEY (`IdPrayerTime`),
+
+  CONSTRAINT `FK_prayer_time_strings`
+    FOREIGN KEY (`NameStrId`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_prayer_time_imgs`
+    FOREIGN KEY (`ImgId`)
+    REFERENCES `imgs` (`IdImg`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_prayer_time_city`
+    FOREIGN KEY (`CityId`)
+    REFERENCES `cities` (`IdCity`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+)
+
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `school_registers`

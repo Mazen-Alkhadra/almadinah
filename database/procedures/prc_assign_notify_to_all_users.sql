@@ -5,8 +5,8 @@ CREATE PROCEDURE `prcAssignNotificationToAllUsers`(
 BEGIN
   INSERT INTO 
       notifications_users (
-        NotificationId,
-        userId
+        userId,
+        NotificationId
       )
   SELECT 
     IdUser, p_notification_id 
