@@ -26,7 +26,9 @@ module.exports = (app) => {
       cityId, 
       zipCode,
       message,
-      isMojammaaMember
+      isMojammaaMember,
+      address,
+      nationalNumber
     } = req.body;
 
     dbConnect.query(
@@ -43,7 +45,9 @@ module.exports = (app) => {
         countryId, 
         cityId,
         message,
-        isMojammaaMember
+        isMojammaaMember,
+        address,
+        nationalNumber
       ]],
       function (err) {
         if(err) {

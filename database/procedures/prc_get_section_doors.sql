@@ -16,5 +16,7 @@ BEGIN
     WHERE 
       Visible = TRUE AND 
       SectionId = p_section_id
+    ORDER BY 
+      DisplayOrder
     ;
 END$$

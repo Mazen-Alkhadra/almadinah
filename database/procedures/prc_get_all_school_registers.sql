@@ -9,7 +9,9 @@ BEGIN
       MobilePhone mobile,
       BirthDate birthDate, 			
       Gender gender, 					
-      Active active          
+      Active active,
+      Address address,
+      NationalNumber nationalNumber       
     FROM 
         school_registers
     ;

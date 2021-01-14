@@ -11,7 +11,9 @@ CREATE PROCEDURE `prcAddSchoolRegister` (
     IN p_country_id INT(20) UNSIGNED,
     IN p_city_id   BIGINT(20) UNSIGNED,
     IN p_register_message NVARCHAR(2000),
-    IN p_is_mojammaa_member BOOLEAN
+    IN p_is_mojammaa_member BOOLEAN,
+    IN p_address   NVARCHAR(500),
+    IN p_national_num NVARCHAR(50)
 )
 BEGIN
 
@@ -20,12 +22,13 @@ DECLARE new_register_id BIGINT(20) UNSIGNED;
 INSERT INTO school_registers (
     FirstName, LastName, PersonalEmail, MobilePhone,
     BirthDate, ZipCode, Gender, ActivationCode, CountryId, CityId,
-    RegisterMessage, IsMojammaaMember
+    RegisterMessage, IsMojammaaMember, Address, NationalNumber
 )
 VALUES (
     p_FirstName, p_LastName, p_PersonalEmail, p_MobilePhone,
     p_BirthDate, p_ZipCode, p_Gender, p_ActivationCode,
-    p_country_id, p_city_id, p_register_message, p_is_mojammaa_member
+    p_country_id, p_city_id, p_register_message, p_is_mojammaa_member,
+    p_address, p_national_num
 );
 
 SET new_register_id = LAST_INSERT_ID();

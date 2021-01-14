@@ -126,6 +126,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `CountryId`             INT(20) UNSIGNED NULL DEFAULT NULL,
   `CityId`                BIGINT(20) UNSIGNED NULL DEFAULT NULL,
   `Photo`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+  `Address` 	    			  NVARCHAR(500) NULL DEFAULT NULL,
+  `NationalNumber` 			  NVARCHAR(50) NULL DEFAULT NULL,
 
   `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
   `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,
@@ -484,6 +486,8 @@ CREATE TABLE IF NOT EXISTS `school_registers` (
   `CountryId`             INT(20) UNSIGNED NULL DEFAULT NULL,
   `CityId`                BIGINT(20) UNSIGNED NULL DEFAULT NULL,
   `Photo`                 BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+  `Address` 	    			  NVARCHAR(500) NULL DEFAULT NULL,
+  `NationalNumber` 			  NVARCHAR(50) NULL DEFAULT NULL,
   `RegisterTimestamp`     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Deleted`               BOOLEAN NOT NULL DEFAULT FALSE,
   `DeletedTimestamp`      DATETIME NULL DEFAULT NULL,

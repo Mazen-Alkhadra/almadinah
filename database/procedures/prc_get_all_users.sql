@@ -12,7 +12,9 @@ BEGIN
       Active active,
       CountryId countryId,
       CityId cityId,
-      ZipCode zipCode        
+      ZipCode zipCode ,
+      Address address,
+      NationalNumber nationalNumber      
     FROM 
         users
     ;

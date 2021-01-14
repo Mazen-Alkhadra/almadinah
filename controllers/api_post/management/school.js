@@ -14,6 +14,8 @@ module.exports = (app) => {
       zipCode,
       countryId,
       cityId,
+      address,
+      nationalNumber,
       registerId
     } = req.body;
     
@@ -26,6 +28,8 @@ module.exports = (app) => {
     zipCode = zipCode || null;
     countryId = countryId || null;
     cityId = cityId || null;
+    address = address || null;
+    nationalNumber = nationalNumber || null;
 
     if(!registerId) {
       res.status(400).end();
@@ -44,6 +48,8 @@ module.exports = (app) => {
         countryId, 
         cityId, 
         active,
+        address,
+        nationalNumber,
         registerId
       ]],
       function (err) {

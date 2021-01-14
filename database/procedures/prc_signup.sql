@@ -11,7 +11,9 @@ CREATE PROCEDURE `prcSignUP` (
     IN p_ActivationCode varchar(100),
     IN p_user_role SMALLINT,
     IN p_country_id INT(20) UNSIGNED,
-    IN p_city_id   BIGINT(20) UNSIGNED
+    IN p_city_id   BIGINT(20) UNSIGNED,
+    IN p_address   NVARCHAR(500),
+    IN p_national_num NVARCHAR(50)
 )
 BEGIN
 
@@ -20,14 +22,14 @@ DECLARE new_user_id BIGINT(20) UNSIGNED;
 INSERT INTO users (
     FirstName, LastName, PersonalEmail, Password, MobilePhone,
     BirthDate, ZipCode, Gender, ActivationCode, Role, CountryId, CityId, 
-    Active
+    Address, NationalNumber, Active
 )
 VALUES (
     p_FirstName, p_LastName, p_PersonalEmail, p_Password, p_MobilePhone,
     p_BirthDate, p_ZipCode, p_Gender, p_ActivationCode,
     CASE WHEN p_user_role IS NULL THEN 1 ELSE 2 END,
     p_country_id, p_city_id, 
-    TRUE
+    p_address, p_national_num, TRUE
 );
 
 SET new_user_id = LAST_INSERT_ID();
