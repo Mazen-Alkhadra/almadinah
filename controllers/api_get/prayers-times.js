@@ -47,11 +47,11 @@ module.exports = (app, passport) => {
     
   });
 
-  app.get('/prayers_times/imgs/:cityId', (req, res) => {    
+  app.get('/prayers_times/imgs/:cityId/:monthNumber', (req, res) => {    
       
     dbConnect.query(
       'CALL prcGetCityPrayersTimesImgs(?);',
-      [[req.userLangPref, req.params.cityId]],
+      [[req.userLangPref, req.params.cityId, req.params.monthNumber]],
       (err, imgs) => {
         if(err) {
           res.status(500).json();

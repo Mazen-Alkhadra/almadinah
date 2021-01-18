@@ -10,6 +10,10 @@ BEGIN
       BirthDate birthDate, 			
       Gender gender, 					
       Active active,
+      ZipCode zipCode,
+      CountryId countryId,
+      CityId cityId,
+      RegisterMessage message,
       Address address,
       NationalNumber nationalNumber       
     FROM 

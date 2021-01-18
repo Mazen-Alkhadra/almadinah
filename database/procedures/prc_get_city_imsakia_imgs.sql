@@ -5,7 +5,7 @@ CREATE PROCEDURE `prcGetCityImsakiaImgs` (
 )
 BEGIN
     SELECT 
-       imgs.IdImg id, imgs.Url url
+       IdImsakia id, imgs.Url url
     FROM 
         imsakia i
         INNER JOIN imgs ON i.ImgId = imgs.IdImg

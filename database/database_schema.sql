@@ -413,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `imsakia` (
   `IdImsakia`		          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NameStrId`	            BIGINT(20) UNSIGNED NULL,
   `ImgId`                 BIGINT(20) UNSIGNED NULL,
-  `CityId`                BIGINT(20) UNSIGNED NULL,
+  `CityId`                BIGINT(20) UNSIGNED NULL UNIQUE,
     
   PRIMARY KEY (`IdImsakia`),
 
@@ -445,9 +445,12 @@ CREATE TABLE IF NOT EXISTS `prayers_times` (
   `NameStrId`	            BIGINT(20) UNSIGNED NULL,
   `ImgId`                 BIGINT(20) UNSIGNED NULL,
   `CityId`                BIGINT(20) UNSIGNED NULL,
+  `MonthNumber`           INT UNSIGNED NOT NULL,   
     
   PRIMARY KEY (`IdPrayerTime`),
 
+  CONSTRAINT `unique_prayerTime` 
+    UNIQUE (`CityId`, `MonthNumber`),
   CONSTRAINT `FK_prayer_time_strings`
     FOREIGN KEY (`NameStrId`)
     REFERENCES `strings` (`IdStr`)

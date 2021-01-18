@@ -42,13 +42,15 @@ module.exports = (app) => {
     let {
       countryId,
       cityId,
-      imgURL
+      imgURL,
+      monthNumber
     } = req.body;
     
     imgURL = imgURL || null;
     cityId = cityId || null;
     countryId = countryId || null;
-  
+    monthNumber = monthNumber || null;
+
     if(!countryId || !cityId) {
       res.status(400).end();
       return;
@@ -58,7 +60,8 @@ module.exports = (app) => {
       'CALL prcAddPrayerTime(?, @out_prayer_time_id);', [[
         req.userLangPref,
         cityId,
-        imgURL
+        imgURL,
+        monthNumber
       ]],
       function (err) {
         if(err) {

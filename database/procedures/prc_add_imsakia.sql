@@ -16,6 +16,8 @@ BEGIN
       p_city_id,
       funInsertImg(p_img_url, NULL, NULL)
   )
+  ON DUPLICATE KEY UPDATE 
+    ImgId = funInsertImg(p_img_url, NULL, NULL)
   ;
 
   SET out_imsakia_id = LAST_INSERT_ID();
