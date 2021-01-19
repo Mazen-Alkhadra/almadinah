@@ -69,4 +69,27 @@ module.exports = (app, passport) => {
     
   });
 
+  app.get('/prayers_times/months/:cityId', (req, res) => {    
+      
+    dbConnect.query(
+      'CALL prcGetPrayersTimesMonths(?);',
+      [[req.userLangPref, req.params.cityId]],
+      (err, months) => {
+        if(err) {
+          res.status(500).json();
+          mojamma.log (
+            `Error in Execution SQL Query: ${this.sql}\n` + err.message,
+            mojamma.logLevels.DB_ERR,
+            __filename,
+            "app.get(/prayers_times/months/:cityId)",
+            null, err
+          );
+          return;
+        }
+        res.status(200).json(months[0]);
+    });
+    
+  });
+
+
 };
