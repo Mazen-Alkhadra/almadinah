@@ -12,4 +12,5 @@ module.exports = (app, passport) => {
   require('./notifications')(app, passport);
   require('./auth')(app, passport);
   require('./prayers-times')(app, passport);
+  require('./quran')(app, passport);
 };
