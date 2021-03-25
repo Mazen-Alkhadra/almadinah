@@ -30,8 +30,8 @@ module.exports = (app, passport) => {
 
     dbConnect.query(
       'CALL prc_get_all_surah_reads(?);',
-      [req.userLangPref, req.params.surahId],
-      (err, reads) => {
+      [[req.userLangPref, req.params.surahId]],
+      function (err, reads) {
         if (err) {
           res.status(500).json();
           mojamma.log(
