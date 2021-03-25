@@ -13,5 +13,5 @@ BEGIN
         SectionId sectionId
     FROM 
       doors d
-      INNER JOIN imgs i ON i.IdImg = d.ImgId;
+      LEFT JOIN imgs i ON i.IdImg = d.ImgId;
 END$$

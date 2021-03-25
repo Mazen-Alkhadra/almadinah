@@ -10,8 +10,8 @@ BEGIN
        i.Url imageURL
     FROM 
         congrats c
-        INNER JOIN imgs i ON i.IdImg = c.ImgId
+        LEFT JOIN imgs i ON i.IdImg = c.ImgId
     WHERE 
-      CategoryId = p_category_id;
+      CategoryId = p_category_id
     ;
 END$$

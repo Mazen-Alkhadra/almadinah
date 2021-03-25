@@ -12,7 +12,7 @@ BEGIN
         ArticlesCategoryId articlesCategoryId
     FROM 
       doors d
-      INNER JOIN imgs i ON i.IdImg = d.ImgId
+      LEFT JOIN imgs i ON i.IdImg = d.ImgId
     WHERE 
       Visible = TRUE AND 
       SectionId = p_section_id

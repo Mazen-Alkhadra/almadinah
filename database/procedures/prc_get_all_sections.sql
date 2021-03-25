@@ -10,6 +10,6 @@ BEGIN
         Visible visible
     FROM 
       sections s
-      INNER JOIN imgs i ON i.IdImg = s.ImgId
+      LEFT JOIN imgs i ON i.IdImg = s.ImgId
     ;
 END$$

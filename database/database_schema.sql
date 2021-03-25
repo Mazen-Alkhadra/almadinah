@@ -604,21 +604,79 @@ CREATE TABLE IF NOT EXISTS `firebase_guest_users` (
   )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
--- -- -----------------------------------------------------
--- -- Table prayers_times
--- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `prayers_times` (
---   `PrayerId`		          BIGINT(20) UNSIGNED NOT NULL,
---   `AthanHour`	            SMALLINT(2) UNSIGNED NOT NULL,
---   `AthanMinutes`          SMALLINT(2) UNSIGNED NOT NULL,
---   `IqamahHour`	          SMALLINT(2) UNSIGNED NULL,
---   `IqamahMinutes`         SMALLINT(2) UNSIGNED NULL,
---   `CityId`                
---   -- `MethodId`            BIGINT(20) UNSIGNED NULL,
-    
--- )
 
--- ENGINE = InnoDB
--- DEFAULT CHARACTER SET = utf8mb4;
+-- -----------------------------------------------------
+-- Table `surah`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `surah` (
+  `id_surah`      	   		BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name_str_id`    			  BIGINT UNSIGNED NOT NULL,
+  `description_str_id`	  BIGINT UNSIGNED NULL,
+  `number`                BIGINT UNSIGNED,
+  `CreatedDateTime`			  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   
+  PRIMARY KEY (`id_surah`),
+  
+  CONSTRAINT `FK_surah_strings_name`
+    FOREIGN KEY (`name_str_id`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_surah_strings_description`
+    FOREIGN KEY (`description_str_id`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table `quran_reads`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `quran_reads` (
+  `id_quran_read`      	  BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name_str_id`    			  BIGINT UNSIGNED NOT NULL,
+  `description_str_id`	  BIGINT UNSIGNED NULL,
+  `CreatedDateTime`			  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   
+  PRIMARY KEY (`id_quran_read`),
+  
+  CONSTRAINT `FK_read_strings_name`
+    FOREIGN KEY (`name_str_id`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_read_strings_description`
+    FOREIGN KEY (`description_str_id`)
+    REFERENCES `strings` (`IdStr`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
+-- -----------------------------------------------------
+-- Table `surah_reads_files`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `surah_reads_files` (
+  `surah_id`       	   		BIGINT UNSIGNED NOT NULL,
+  `quran_read_id`    		  BIGINT UNSIGNED NOT NULL,
+  `surah_page_number`     BIGINT UNSIGNED,
+  `file_url`              VARCHAR(500),
+ 
+  PRIMARY KEY (`surah_id`, `quran_read_id`),
+  
+  CONSTRAINT `FK_surah_of_read`
+    FOREIGN KEY (`surah_id`)
+    REFERENCES `surah` (`id_surah`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `FK_read_of_surah`
+    FOREIGN KEY (`quran_read_id`)
+    REFERENCES `quran_reads` (`id_quran_read`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;

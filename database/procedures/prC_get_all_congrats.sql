@@ -10,6 +10,6 @@ BEGIN
        CategoryId categoryId
     FROM 
         congrats c
-        INNER JOIN imgs i ON i.IdImg = c.ImgId
+        LEFT JOIN imgs i ON i.IdImg = c.ImgId
     ;
 END$$

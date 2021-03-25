@@ -6,7 +6,7 @@ CREATE PROCEDURE `prcGetPrayersTimesCities` (
 BEGIN
 
     SELECT 
-        c.IdCity id,
+        DISTINCT c.IdCity id,
         funGetString(c.NameStrId, p_lang) name,
         im.Url imgURL
     FROM 
