@@ -10,7 +10,6 @@ module.exports = (app) => {
   ftpClient.on('ready', function() {
   ftpClient.put(req.file.path, req.file.originalname, function(err) {
     if (err) {
-      res.status(500).json({});
       mojamma.log (
         `Error in upload img to ftp server\n` + err,
         mojamma.logLevels.SERVER_ERR,
@@ -18,6 +17,7 @@ module.exports = (app) => {
         "app.post(/management/upload/img)",
         null, err
       );
+      res.status(500).json({});
       return;
     }
       const imgUrl = mojamma.config.webSiteUrl + '/ftp/img/' + 

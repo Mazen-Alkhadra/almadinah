@@ -4,12 +4,12 @@ CREATE PROCEDURE `prc_get_all_surah` (
 )  
 BEGIN
   SELECT 
-    DISTINCT id_surah idSurah,
+    DISTINCT id_surah id,
     funGetString(name_str_id, p_lang) name,
     funGetString(description_str_id, p_lang) description,
     number    
   FROM 
     surah_reads_files srf
-    INNER JOIN surah ON s.id_surah = srf.surah_id
+    INNER JOIN surah s ON s.id_surah = srf.surah_id
   ;
 END$$
