@@ -1,7 +1,12 @@
 const mojamma = require('../../../bin/mojammaa');
 const dbConnect = require('../../../database/connect');
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({
+  dest: 'uploads/' , 
+  limits: {
+    fieldSize: 15 * 1024 * 1024, // 15 MB,
+    fileSize: 15 * 1024 * 1024, // 15 MB
+  }});
 const ftpClient = new require('ftp')();
 
 module.exports = (app) => {
