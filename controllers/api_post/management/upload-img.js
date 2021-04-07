@@ -13,7 +13,10 @@ module.exports = (app) => {
   app.post('/management/upload/img', upload.single('picture'), function(req, res) {
   
   ftpClient.on('ready', function() {
-  ftpClient.put(req.file.path, req.file.originalname, function(err) {
+  ftpClient.put(
+    req.file.path,
+    `${Date.now()}_${req.file.originalname}`,
+    function(err) {
     if (err) {
       mojamma.log (
         `Error in upload img to ftp server\n` + err,
