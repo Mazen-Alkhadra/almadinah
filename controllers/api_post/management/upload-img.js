@@ -11,11 +11,12 @@ const ftpClient = new require('ftp')();
 
 module.exports = (app) => {
   app.post('/management/upload/img', upload.single('picture'), function(req, res) {
-  
+  let fileName = `${Date.now()}_${req.file.originalname}`;
+
   ftpClient.on('ready', function() {
   ftpClient.put(
     req.file.path,
-    `${Date.now()}_${req.file.originalname}`,
+    fileName,
     function(err) {
     if (err) {
       mojamma.log (
@@ -29,7 +30,7 @@ module.exports = (app) => {
       return;
     }
       const imgUrl = mojamma.config.webSiteUrl + '/ftp/img/' + 
-        req.file.originalname;
+        fileName;
       
       dbConnect.query(
         'SELECT funInsertImg(?);', [[
