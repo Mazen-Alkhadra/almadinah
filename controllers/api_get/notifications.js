@@ -33,7 +33,8 @@ module.exports = (app, passport) => {
       
   });
 
-  app.get('/notifications/user/unread/count', (req, res) => {    
+  app.get('/notifications/user/unread/count', (req, res) => { 
+	req.user = req.user || {};  
     dbConnect.query(
       'CALL prcGetUserUnReadNotifiesCnt(?);',
       [req.user.IdUser],
