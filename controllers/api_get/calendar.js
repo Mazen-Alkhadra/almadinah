@@ -7,7 +7,7 @@ module.exports = (app, passport) => {
   app.get('/calendar/gregTohijri/:gregYear/:gregMonth/:gregDay', (req, res) => {
       const {gregYear, gregMonth, gregDay} = req.params;
       const aladanApiUrl = 
-        `http://api.aladhan.com/v1/gToH?date=${gregDay}-${+gregMonth + 1}-${gregYear}`;
+        `https://api.aladhan.com/v1/gToH?date=${gregDay}-${+gregMonth + 1}-${gregYear}`;
       
       fetch(aladanApiUrl)
       .then(response => {
