@@ -24,8 +24,7 @@ module.exports = function (notification) {
         notification.content,
         null,
         null,
-        '#dddddd',
-        notification.imgUrl
+        '#dddddd'
       );
       if (fbInfoRows.length === 0) {
         resolve({ status: 200 });

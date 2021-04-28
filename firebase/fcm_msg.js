@@ -53,8 +53,7 @@ var message = {
 
 function FcmMsg ( regToken, data, topic, condition,
                   notificationTitle, notificationBody, 
-                  priority, notificationSound, notificationColor,
-                  notificationImgUrl) {
+                  priority, notificationSound, notificationColor) {
     
     this.android = { priority: priority || 'high'};
     this.android.notification = {};
