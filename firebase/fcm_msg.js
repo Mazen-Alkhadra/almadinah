@@ -53,14 +53,15 @@ var message = {
 
 function FcmMsg ( regToken, data, topic, condition,
                   notificationTitle, notificationBody, 
-                  priority, notificationSound, notificationColor) {
+                  priority, notificationSound, notificationColor, notificationImgUrl) {
     
     this.android = { priority: priority || 'high'};
     this.android.notification = {};
     this.android.notification.sound = notificationSound || "default";
     this.android.notification.color = notificationColor || "#ffffff";
     this.apns = { headers: { 'apns-priority': priority === 'normal' ? '5' : '10' } };
-
+	this.data = {};
+	
     if(regToken)
         this.token = regToken;
     if(data)
@@ -69,7 +70,7 @@ function FcmMsg ( regToken, data, topic, condition,
     this.notification = {};
     this.notification.title = notificationTitle;
     this.notification.body = notificationBody;
-    
+    this.data.imgUrl = notificationImgUrl
 
     if(topic)
         this.topic = topic;
