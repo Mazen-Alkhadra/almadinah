@@ -70,7 +70,7 @@ function FcmMsg ( regToken, data, topic, condition,
     this.notification = {};
     this.notification.title = notificationTitle;
     this.notification.body = notificationBody;
-    this.data.imgUrl = notificationImgUrl
+    this.data = JSON.stringify({notificationImgUrl});
 
     if(topic)
         this.topic = topic;
