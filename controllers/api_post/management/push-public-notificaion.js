@@ -42,7 +42,7 @@ module.exports = function (notification) {
       fcm.sendMulticast(fcmMsg)
         .then((response) => {
           mojamma.log(
-            `Successfully sent message: ${response}`,
+            `Successfully sent message: ${JSON.stringify(response)}`,
             mojamma.logLevels.FCM_INFO, __filename,
             "pushPublicNotification", null
           );
