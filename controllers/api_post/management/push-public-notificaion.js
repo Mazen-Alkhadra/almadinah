@@ -36,7 +36,7 @@ module.exports = function (notification) {
         row => fcmMsg.tokens.push(row.InstanceId)
       );
       
-      console.log('################\n', fcmMsg.tokens);
+      console.log('################\n', fcmMsg);
 
       fcm.sendMulticast(fcmMsg)
         .then((response) => {
