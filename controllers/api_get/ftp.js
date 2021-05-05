@@ -5,6 +5,10 @@ module.exports = (app, passport) => {
   app.get('/ftp/img/:path', function (req, res) {
     const ftpClient = new require('ftp')();
     ftpClient.on('ready', function () {
+      res.on('close', function() {
+        res.end();
+        ftpClient.end();
+      });
       ftpClient.get(req.params.path, function (err, imgFileStram) {
         if (err) {
           res.status(500).json({});
