@@ -52,6 +52,51 @@ let validators = {
     return true;
   },
 
+  addCustomer: function ({ }) {
+    return { valid: true };
+  },
+
+  updateCustomer: function ({ }) {
+    return { valid: true };
+  },
+
+  deleteCustomer: function ({ }) {
+    return { valid: true };
+  },
+
+  addBill: function ({ customrId }) {
+    if(!customrId) 
+      return { valid: false };
+    return { valid: true };
+  },
+  updateBill: function ({ billId }) {
+    if(!billId) 
+      return { valid: false };
+    return { valid: true };
+  },
+  deleteBill: function ({ billId }) {
+    if(!billId) 
+      return { valid: false };
+    return { valid: true };
+  },
+
+  addPayment: function ({ customrId }) {
+    if(!customrId) 
+      return { valid: false };
+
+    return { valid: true };
+  },
+  updatePayment: function ({ paymentId }) {
+    if(!paymentId) 
+      return { valid: false };
+    return { valid: true };
+  },
+  deletePayment: function ({ paymentId }) {
+    if(!paymentId) 
+      return { valid: false };
+    return { valid: true };
+  },
+
 };
 
 module.exports = validators;
