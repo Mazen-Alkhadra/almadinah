@@ -6,5 +6,8 @@ module.exports = {
   os: require('./os'),
   randomCodesGenerator: require('./random-codes-generator'),
   validators: require('./validators'),
-  User: require('./users')
+  User: require('./users'),
+  Bill: require('./bill'),
+  Customer: require('./customer'),
+  Payment: require('./payment')
 }

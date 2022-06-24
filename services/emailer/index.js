@@ -119,48 +119,7 @@ class Emailer {
       mailBodyHtml
     );
   }
-
-  async sendAwardInfoToUser (
-    userFirstName, userLastName, userEmail, 
-    awardName, awardPhoto
-  ) {
-
-    let mailBodyHtml = 
-      `Dear <b>${userFirstName} ${userLastName},</b>
-      <p>We are pleased to inform you that you have won with us the flowing award:</p>
-      <p>${awardName}</p>
-      <p><img src="${awardPhoto}" /></p>
-      <p>Please Contact us to receive the award</p>
-      <p>Best regards.</p>`;
-
-    Emailer.sendMail(
-      userEmail,
-      `${appName} Awards`,
-      null,
-      mailBodyHtml
-    );
-  }
-
-  static sendAwardInfoToAdmin (
-    userFirstName, userLastName, userEmail, 
-    userMobile, awardName, awardPhoto, adminMail
-  ) {
-    let mailBodyHtml = 
-      `<p>The Folowing Award Has Catched</p>
-      <p>User Name: ${userFirstName} ${userLastName}</p>
-      <p>User Mail: ${userEmail}</p>
-      <p>User Mobile: ${userMobile}</p>
-      <p>Award Name: ${awardName}</p>
-      <img src="${awardPhoto}" />`;
-
-    Emailer.sendMail(
-      adminMail,
-      `${appName} Awards`,
-      null,
-      mailBodyHtml
-    );
-  }
-
+ 
 }
 
 module.exports = Emailer;

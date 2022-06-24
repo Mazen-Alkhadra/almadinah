@@ -2,10 +2,8 @@ const Model = require('../model');
 billRecordModel = require('./records');
 
 class Bill extends Model {
-  static TABLE_NAME = 'bills';
-  static PRIMARY_KEY = 'id_bill';
-  
-  recordModel = billRecordModel.create();
+ 
+  records = billRecordModel.create();
 
   async getAllBillsFullInfo ({
     limit, skip, filters, sorts
