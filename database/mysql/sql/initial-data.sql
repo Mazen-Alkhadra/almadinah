@@ -26,4 +26,4 @@ INSERT INTO `roles_resources_permissions` VALUES
 -- Dumping data for table `users`
 --
 --  admin@12345
-INSERT INTO `users` VALUES (1,'admin','admin','admin@almadinah-ph.com',NULL,'$2b$04$4xkI/yTbQ1.a4tOqL00sYevDgn1Hf6TdkNJl4au1Nn/mNSYQv1oWK',NULL,NULL,NULL,'SUPER_ADMIN', FALSE, current_timestamp());
+INSERT INTO `users` VALUES (1,'admin','admin','admin@almadinah-ph.com',NULL,'$2b$04$4xkI/yTbQ1.a4tOqL00sYevDgn1Hf6TdkNJl4au1Nn/mNSYQv1oWK',NULL,NULL,NULL,'SUPER_ADMIN', FALSE, TRUE, 'SYSTEM', current_timestamp());

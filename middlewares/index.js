@@ -45,4 +45,7 @@ module.exports = (app) => {
   app.use(authMiddleware.init);
   app.use(catchRoutErrMiddleware);
   app.use(userLangMiddleWare);
+  
+  //Access Control
+  app.use('/api/user/*', authMiddleware.requireLogin());
 }
