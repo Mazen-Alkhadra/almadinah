@@ -29,7 +29,7 @@ BEGIN
   )
   ;
 
-  SET out_bill_id = LAST_INSERT_ID();
-  SELECT out_bill_id AS newRecordId;
+  SET out_payment_id = LAST_INSERT_ID();
+  SELECT out_payment_id AS newRecordId;
 
 END$$

@@ -20,7 +20,7 @@ BEGIN
     customer_id = IFNULL(p_customer_id, customer_id),
     serial_number = IFNULL(p_serial_number, serial_number),
     notic = IFNULL(p_notic, notic),
-    at = IFNULL(p_at, at),
+    at = IFNULL(p_at, at)
   WHERE 
     id_bill = p_bill_id
   ;

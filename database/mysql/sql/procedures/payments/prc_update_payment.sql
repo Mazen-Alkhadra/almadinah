@@ -22,7 +22,7 @@ BEGIN
     serial_number = IFNULL(p_serial_number, serial_number),
     value = IFNULL(p_value, value),
     notic = IFNULL(p_notic, notic),
-    at = IFNULL(p_at, at),
+    at = IFNULL(p_at, at)
   WHERE 
     id_payment = p_payment_id
   ;

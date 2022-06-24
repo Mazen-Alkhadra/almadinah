@@ -235,6 +235,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table payments
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `payments` (
   `id_payment`            BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `customer_id`           BIGINT UNSIGNED NULL DEFAULT NULL,
@@ -244,9 +245,9 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `at`                    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `creat_at`              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (`id_bill`),
+  PRIMARY KEY (`id_payment`),
   
-  CONSTRAINT `fk_bill_customer`
+  CONSTRAINT `fk_payment_customer`
     FOREIGN KEY (`customer_id` )
     REFERENCES `customers` (`id_customer`)
     ON DELETE RESTRICT
