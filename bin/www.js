@@ -1,32 +1,39 @@
 // server 
-const mojammaa = require('./mojammaa');
+const os = require('../services/os');
 const cluster = require('cluster');
+const logger = require('../services/logger');
+const {app: appConfig} = require('../config/server');
 
 if (cluster.isMaster) {
-	var numWorkers = mojammaa.runTimeValues.getWorkerForkCount();
-
+	var numWorkers = os.getWorkerForkCount();
+	
 	for (var i = 0; i < numWorkers; ++i) {
-		cluster.fork();
+		let worker = cluster.fork();
+
+		worker.on('exit', function (code, signal) {
+			logger.log (
+				logger.levels.SERVER_INFO,
+				`A worker with id ${worker.id} 
+				has exited with code ${code} and signal ${signal}`,
+				__filename,
+				"worker.on(exit)"
+			);
+			cluster.fork();
+		});
+
 	}
 
-	cluster.on('exit', function (worker, code, signal) {
-		mojammaa.log(
-			`A worker with id ${worker.id} has exited with code ${code} and signal ${signal}`,
-			mojammaa.logLevels.SERVER_INFO,
-			__filename,
-			"cluster.on(exit)"
-		);
-		cluster.fork();
-	});
-
 } else {
+	
 	process.env.NODE_ENV = 'production';
-	var app = require('../app');
+	var app = require('./app');
 	app.set('port', (process.env.PORT || 9092));
-	app.listen(app.get('port'));
-	mojammaa.log(
+	app.listen(app.get('port'))
+		.headersTimeout = appConfig.headersTimeout;
+	logger.log (
+    logger.levels.SERVER_INFO,
 		`A worker with id ${cluster.worker.id} is listening on port ${app.get('port')}`,
-		mojammaa.logLevels.SERVER_INFO,
 		__filename,
 	);
+
 }
