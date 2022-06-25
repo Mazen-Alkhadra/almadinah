@@ -3,4 +3,5 @@ module.exports = app => {
   require('./payment')(app);
   require('./customer')(app);
   require('./bill')(app);
+  require('./report')(app);
 };

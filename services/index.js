@@ -9,5 +9,6 @@ module.exports = {
   User: require('./users'),
   Bill: require('./bill'),
   Customer: require('./customer'),
-  Payment: require('./payment')
+  Payment: require('./payment'),
+  Report: require('./report')
 }
