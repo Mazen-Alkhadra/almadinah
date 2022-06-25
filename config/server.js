@@ -8,7 +8,7 @@ module.exports = {
   },
   session: {
     defaultSecretKey: 'almadinah-ph',
-    cookieMaxAge: 30 * 24 * 60 * 60 * 1000
+    cookieMaxAge: 24 * 60 * 60 * 1000
   },
   cookie: {
     userLanguageKey: 'languagePref'

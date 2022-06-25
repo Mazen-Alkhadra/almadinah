@@ -14,7 +14,7 @@ passport.use (
 	},
 		async function (loginName, password, done) {
 			let user = null;
-			let hashSvc = new HashSvc();
+			let hashSvc = HashSvc.create();
 
 				try {
 					user = await (new UserModel()).findUser({loginName});
