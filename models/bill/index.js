@@ -68,7 +68,7 @@ class Bill extends Model {
 
     let newId = dbRet[0][0].newRecordId;
 
-    await this.recordModel.resetBillRecords({
+    await this.records.resetBillRecords({
       billId: newId, records
     });
 
@@ -85,7 +85,7 @@ class Bill extends Model {
        [billId, customerId, serialNumber, notic, at]
     );
 
-    await this.recordModel.resetBillRecords({billId, records});
+    await this.records.resetBillRecords({billId, records});
   }
 
   async deleteBill ({billId}) {
