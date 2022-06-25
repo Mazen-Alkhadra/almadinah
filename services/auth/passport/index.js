@@ -1,6 +1,6 @@
 // Authenticate requests using passport 
 const passport = require('passport');
-const UserModel = require('../../../models').User;
+const UserModel = require('../../../models').user;
 
 passport.serializeUser(function (req, user, done) {
 	done(null, user.id);
@@ -8,8 +8,7 @@ passport.serializeUser(function (req, user, done) {
 
 passport.deserializeUser(async function (req, userId, done) {
 	try {
-    let userModel = new UserModel();
-		let user = await userModel.findUser({userId});
+		let user = await UserModel.create().findUser({userId});
 		done(null, user);
 	} catch(err) {
 		done(err, null);

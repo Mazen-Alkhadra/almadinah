@@ -2,7 +2,7 @@
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const logger = require('../../logger');
-const UserModel = require('../../../models').User;
+const UserModel = require('../../../models').user;
 let HashSvc = require('../../hash');
 const {ERR_INACTIVE_ACCOUNT} = require('../../../resources').errors.codes;
 
@@ -17,7 +17,7 @@ passport.use (
 			let hashSvc = HashSvc.create();
 
 				try {
-					user = await (new UserModel()).findUser({loginName});
+					user = await UserModel.create().findUser({loginName});
 				} catch (err) {
 					logger.log(
 						logger.levels.SERVER_ERR,
