@@ -63,7 +63,7 @@ class Customer extends Model {
     );
   }
 
-  static async deleteCustomer({ customerId }) {
+  async deleteCustomer({ customerId }) {
     await this.directQuery(
       'CALL prc_delete_customer(?);',
       customerId
