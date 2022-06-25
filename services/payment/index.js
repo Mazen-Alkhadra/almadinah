@@ -26,7 +26,7 @@ class Payment {
     paymentId, customerId, notic, serialNumber, at,
     value
   }) {
-    await this.paymentModel.updateBill({
+    await this.paymentModel.update({
       paymentId, customerId, notic, serialNumber, at,
       value
     });
