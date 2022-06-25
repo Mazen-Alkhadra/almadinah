@@ -15,7 +15,7 @@ class Payment extends Model {
 
     let dataQuery =
       `SELECT
-        id_payment paymentId
+        id_payment paymentId,
         serial_number serialNumber,
         value,
         notic,
