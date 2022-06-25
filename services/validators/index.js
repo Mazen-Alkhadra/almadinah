@@ -64,8 +64,8 @@ let validators = {
     return { valid: true };
   },
 
-  addBill: function ({ customrId }) {
-    if(!customrId) 
+  addBill: function ({ customerId }) {
+    if(!customerId) 
       return { valid: false };
     return { valid: true };
   },
@@ -80,8 +80,8 @@ let validators = {
     return { valid: true };
   },
 
-  addPayment: function ({ customrId }) {
-    if(!customrId) 
+  addPayment: function ({ customerId }) {
+    if(!customerId) 
       return { valid: false };
 
     return { valid: true };
