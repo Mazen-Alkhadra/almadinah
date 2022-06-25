@@ -4,7 +4,7 @@ module.exports = app => {
 
   require('./get')(app);
   require('./post')(app);
-  // require('./delete')(app);
+  require('./delete')(app);
   
   //API not supported
   app.all("*", function(req, res) {

@@ -1,5 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE `prc_update_customer` (
+  p_customer_id                   BIGINT UNSIGNED, 
   p_first_name 			              VARCHAR(50),
   p_last_name				              VARCHAR(50), 
   p_mobile                        VARCHAR(50),
