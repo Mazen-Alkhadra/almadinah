@@ -8,7 +8,7 @@ module.exports = app => {
 		(req, res) => {
 			try {
 
-				Auth.getAuthenticateMiddleware(({ err, user, info }) => {
+				Auth.type.getAuthenticateMiddleware(({ err, user, info }) => {
 					try {
 
 						if (err) throw err;
