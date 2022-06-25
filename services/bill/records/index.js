@@ -7,7 +7,7 @@ class BillsRecordes {
   async getAllBillsRecordsFullInfo({
     billId, limit, skip, filters, sorts
   }) {    
-    return await this.billModel.recordModel.getAllBillsRecordsFullInfo({
+    return await this.billModel.records.getAllBillsRecordsFullInfo({
       billId, limit, skip, filters, sorts
     });
   }
@@ -15,7 +15,7 @@ class BillsRecordes {
   async resetBillRecords ({
     billId, records
   }) {
-    await this.billModel.recordModel.resetBillRecords({
+    await this.billModel.records.resetBillRecords({
       billId, records
     });
   }
