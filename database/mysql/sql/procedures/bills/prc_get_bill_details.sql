@@ -8,7 +8,8 @@ BEGIN
     id_bill billId,
     notic,
     at,
-    customer_id customerId
+    customer_id customerId,
+    final_total finalTotal
   FROM
     bills
   WHERE 

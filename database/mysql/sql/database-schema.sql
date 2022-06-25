@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS `bills` (
   `serial_number`         BIGINT UNSIGNED NOT NULL,
   `notic`                 LONGTEXT NULL DEFAULT NULL,
   `at`                    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `final_total`           DOUBLE NULL,
   `creat_at`              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id_bill`),

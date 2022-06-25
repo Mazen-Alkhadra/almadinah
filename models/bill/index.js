@@ -20,7 +20,8 @@ class Bill extends Model {
         customer_id customerId,
         b.serial_number serialNumber,
         notic,
-        b.at
+        b.at,
+        final_total finalTotal
       FROM
         bills b`;
 
@@ -56,14 +57,14 @@ class Bill extends Model {
 
   async addBill ({
     customerId, notic, serialNumber, at,
-    records 
+    finalTotal, records 
     /*[{quantity, unitPrice, discount, addition, notice}]*/
   }) {
     
     let queryStr = `CALL prc_add_bill(?, @new_entry_id);`    
     let dbRet = await this.directQuery (
       queryStr, 
-      [customerId, serialNumber, notic, at]
+      [customerId, serialNumber, notic, at, finalTotal]
     );
 
     let newId = dbRet[0][0].newRecordId;
@@ -77,12 +78,12 @@ class Bill extends Model {
 
   async updateBill ({
     billId, customerId, notic, serialNumber, at,
-    records 
+    finalTotal, records 
     /*[{quantity, unitPrice, discount, addition, notice}]*/
   }) {
     await this.directQuery (
       'CALL prc_update_bill(?);',
-       [billId, customerId, serialNumber, notic, at]
+       [billId, customerId, serialNumber, notic, at, finalTotal]
     );
 
     await this.records.resetBillRecords({billId, records});

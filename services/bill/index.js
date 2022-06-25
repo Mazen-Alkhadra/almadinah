@@ -20,21 +20,21 @@ class Bill {
 
   async addBill ({
     customerId, notic, serialNumber, at,
-    records 
+    finalTotal, records 
   }) {
     await this.billModel.addBill({
       customerId, notic, serialNumber, at,
-      records 
+      finalTotal, records 
     });
   }
 
   async updateBill ({
     billId, customerId, notic, serialNumber, at,
-    records 
+    finalTotal, records 
   }) {
     await this.billModel.updateBill({
       billId, customerId, notic, serialNumber, at,
-      records 
+      finalTotal, records 
     });
   }
 

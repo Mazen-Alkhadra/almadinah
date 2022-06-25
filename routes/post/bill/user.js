@@ -9,11 +9,11 @@ module.exports = app => {
 		async (req, res) => {
 			try {
 				const { customerId, notic, serialNumber, at,
-					records } = req.body;
+					finalTotal, records } = req.body;
 
 				await BillSvc.create().addBill({
 					customerId, notic, serialNumber, at,
-					records
+					finalTotal, records
 				});
 
 				res.status(200).end();
@@ -29,11 +29,11 @@ module.exports = app => {
 		async (req, res) => {
 			try {
 				const { billId, customerId, notic, serialNumber, at,
-					records } = req.body;
+					finalTotal, records } = req.body;
 
 				await BillSvc.create().updateBill({
 					billId, customerId, notic, serialNumber, at,
-					records
+					finalTotal, records
 				});
 
 				res.status(200).end();

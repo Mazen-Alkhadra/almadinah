@@ -4,7 +4,8 @@ CREATE PROCEDURE `prc_update_bill` (
   p_customer_id           BIGINT UNSIGNED,
   p_serial_number         BIGINT UNSIGNED,
   p_notic                 LONGTEXT,
-  p_at                    DATETIME
+  p_at                    DATETIME,
+  p_final_total           DOUBLE
 )  
 BEGIN
 
@@ -20,7 +21,8 @@ BEGIN
     customer_id = IFNULL(p_customer_id, customer_id),
     serial_number = IFNULL(p_serial_number, serial_number),
     notic = IFNULL(p_notic, notic),
-    at = IFNULL(p_at, at)
+    at = IFNULL(p_at, at),
+    final_total = IFNULL(p_final_total, final_total)
   WHERE 
     id_bill = p_bill_id
   ;

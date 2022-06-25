@@ -4,6 +4,7 @@ CREATE PROCEDURE `prc_add_bill` (
   p_serial_number         BIGINT UNSIGNED,
   p_notic                 LONGTEXT,
   p_at                    DATETIME,
+  p_final_total           DOUBLE,
   OUT out_bill_id         BIGINT UNSIGNED
 )  
 BEGIN
@@ -13,7 +14,8 @@ BEGIN
       customer_id,
       serial_number,
       notic,
-      at
+      at,
+      final_total
     )
   VALUES (
       p_customer_id,
@@ -22,7 +24,8 @@ BEGIN
         fun_get_auto_bill_serial_number()
       ),
       p_notic,
-      p_at
+      p_at,
+      p_final_total
   )
   ;
 
