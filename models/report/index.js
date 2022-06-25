@@ -11,10 +11,7 @@ class Report extends Model {
       [customerId, from, to]
     );
 
-    return {
-      bills: dbRet[0],
-      payments: dbRet[1]
-    };
+    return { data: [...dbRet[0], ...dbRet[1]] };
   }
 }
 
