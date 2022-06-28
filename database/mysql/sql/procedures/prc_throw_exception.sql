@@ -7,7 +7,9 @@ BEGIN
 
   DECLARE v_err_code VARCHAR(50) DEFAULT '1644';
   DECLARE v_err_msg  VARCHAR(50) DEFAULT 'Mysql Unknown Exception';
-  
+
+  ROLLBACK;
+    
   SET v_err_code = IFNULL(p_err_code, v_err_code);
   SET v_err_msg = IFNULL(p_err_msg, v_err_msg);
 

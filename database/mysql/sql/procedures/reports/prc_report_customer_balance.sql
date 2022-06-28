@@ -8,19 +8,19 @@ BEGIN
      
   SELECT 
     id_bill billId,
-    b.customer_id customerId,
-    b.serial_number serialNumber,
-    b.notic,
-    b.at,
-    finalTotal value
+    customer_id customerId,
+    serial_number serialNumber,
+    notic,
+    at,
+    final_total value
   FROM 
     bills
   WHERE 
     (customer_id = p_customer_id OR p_customer_id IS NULL) AND 
-    (p_from IS NULL OR p_from <= at) AND 
-    (p_to IS NULL OR p_to >= at)
+    (p_from IS NULL OR p_from <= DATE(at)) AND 
+    (p_to IS NULL OR p_to >= DATE(at))
   ORDER BY 
-    b.at ASC
+    at ASC
   ;
 
   SELECT 
@@ -34,8 +34,8 @@ BEGIN
     payments 
   WHERE 
     (customer_id = p_customer_id OR p_customer_id IS NULL) AND 
-    (p_from IS NULL OR p_from <= at) AND 
-    (p_to IS NULL OR p_to >= at)
+    (p_from IS NULL OR p_from <= DATE(at)) AND 
+    (p_to IS NULL OR p_to >= DATE(at))
   ORDER BY 
     at ASC
   ;
