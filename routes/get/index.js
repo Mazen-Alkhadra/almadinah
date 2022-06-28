@@ -1,3 +1,5 @@
+let path = require('path');
+
 module.exports = app => {  
   require('./auth')(app);
   require('./payment')(app);
