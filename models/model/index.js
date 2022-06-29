@@ -134,7 +134,7 @@ class Model {
     return sqlClause ? `(${sqlClause})` : "TRUE";
   }
 
-  applyFilters(sqlQuery, filters, groupOpt) {
+  applyFilters(sqlQuery, filters, groupOpt, onlyData) {
 
     if (!filters || !filters.length)
       return null;
@@ -144,6 +144,9 @@ class Model {
     if (groupOpt)
       groupCountsClause =
         `,COUNT(DISTINCT ${groupOpt.groupby}) ${groupOpt.groupCountAlias}`;
+
+    if(onlyData)
+      return `SELECT * FROM (${sqlQuery}) AS temp_data WHERE ${this.getFiltersSqlCluase(filters)}`;
 
     return `
         SELECT COUNT(*) allCount ${groupCountsClause}
