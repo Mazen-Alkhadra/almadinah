@@ -24,18 +24,30 @@ class CashEntry extends Model {
       FROM
         cash_entries`;
 
+      let summaryQuery =
+      `SELECT
+        SUM(IFNULL(income, 0)) incomes,
+        SUM(IFNULL(outcome, 0)) outcomes
+      FROM
+        cash_entries`;
+
     let queryStr = `${countQuery + dataQuery}`;
         
     queryStr = this.applyFilters( dataQuery, filters ) || queryStr;
     queryStr += `${this.getOrderClause(sorts)}`;
     queryStr += `${this.getLimitClause({ limit, skip })};`;
 
+    queryStr += this.applyFilters( summaryQuery, filters ) || summaryQuery + ';';
 
     let dbRet = await this.directQuery(queryStr);
 
+    const {incomes, outcomes} = dbRet[2][0];
+    let summary = [incomes, outcomes, incomes - outcomes];
+
     return {
       allCount: dbRet[0][0].allCount,
-      data: dbRet[1]
+      data: dbRet[1],
+      summary
     };
 
   }
