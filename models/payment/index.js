@@ -28,7 +28,7 @@ class Payment extends Model {
         `SELECT
           SUM(value) total
         FROM
-          (${this.applyFilters( dataQuery, filters ) || dataQuery}) 
+          (${this.applyFilters( dataQuery, filters, null, true ) || dataQuery}) 
         AS filtered_data;`;
 
     let queryStr = `${countQuery + dataQuery}`;
