@@ -44,7 +44,7 @@ class CashEntry extends Model {
     notic, serialNumber, income, outcome, at
   }) {
     
-    let queryStr = `CALL prc_add_payment(?, @new_entry_id);`    
+    let queryStr = `CALL prc_add_cash_entry(?, @new_entry_id);`    
     let dbRet = await this.directQuery (
       queryStr, 
       [serialNumber, income, outcome, notic, at]
