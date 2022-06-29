@@ -23,6 +23,12 @@ class Payment extends Model {
         at
       FROM
         payments`;
+      
+      let summaryQuery =
+        `SELECT
+          SUM(value) total
+        FROM
+          payments`;
 
     let queryStr = `${countQuery + dataQuery}`;
         
@@ -30,12 +36,16 @@ class Payment extends Model {
     queryStr += `${this.getOrderClause(sorts)}`;
     queryStr += `${this.getLimitClause({ limit, skip })};`;
 
+    queryStr += this.applyFilters( summaryQuery, filters ) || summaryQuery + ';';
 
     let dbRet = await this.directQuery(queryStr);
 
+    const {total} = dbRet[2][0];
+    
     return {
       allCount: dbRet[0][0].allCount,
-      data: dbRet[1]
+      data: dbRet[1],
+      summary: [total]
     };
 
   }

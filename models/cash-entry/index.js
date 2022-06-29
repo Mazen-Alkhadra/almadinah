@@ -29,7 +29,8 @@ class CashEntry extends Model {
         SUM(IFNULL(income, 0)) incomes,
         SUM(IFNULL(outcome, 0)) outcomes
       FROM
-        cash_entries`;
+        (${this.applyFilters( dataQuery, filters ) || dataQuery}) 
+      AS filtered_data`;
 
     let queryStr = `${countQuery + dataQuery}`;
         
