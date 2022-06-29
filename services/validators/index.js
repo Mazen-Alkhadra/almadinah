@@ -114,6 +114,10 @@ let validators = {
     return { valid: true };
   },
 
+  updateProfile: function () {
+    return { valid: true };
+  },
+
 };
 
 module.exports = validators;

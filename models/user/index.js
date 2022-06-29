@@ -58,6 +58,21 @@ class User extends Model {
     );
   }
 
+  async updateUser ({
+    userId, firstName, lastName, password, 
+    email, mobile, birthDate, gender,
+    imgUrl, roleId, isActive
+  }) {
+  
+    let queryStr = 'CALL prc_update_user(?);';
+
+    await this.directQuery(queryStr,
+      [userId, firstName, lastName, email, mobile, 
+        password, birthDate, gender, roleId, imgUrl,
+        isActive]
+    );
+  }
+
   async addActivationCode ({code, loginName}) {
   
     let queryStr = 'CALL prc_add_activation_code(?);';

@@ -1,4 +1,5 @@
 const UserModel = require('../../models').user;
+let HashSvc = require('../hash');
 
 class User {
   userModel = UserModel.create();
@@ -13,10 +14,24 @@ class User {
     imgUrl, roleId, isActive
   }) {
 
-    mobile = this.userModel.fixMobile({mobile});
-
     await this.userModel.addNewUser({
       firstName, lastName, password, 
+      birthDate, gender, email, mobile,
+      imgUrl, roleId, isActive
+    });
+  }
+
+  async updateUser({
+    userId, firstName, lastName, password,
+    birthDate, gender, email, mobile,
+    imgUrl, roleId, isActive
+  }) {
+
+    const hashedPassword = await HashSvc.create().hash(password);
+    
+    await this.userModel.updateUser({
+      userId, firstName, lastName, 
+      password: hashedPassword,
       birthDate, gender, email, mobile,
       imgUrl, roleId, isActive
     });
