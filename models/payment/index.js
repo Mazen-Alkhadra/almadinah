@@ -28,7 +28,8 @@ class Payment extends Model {
         `SELECT
           SUM(value) total
         FROM
-          payments`;
+          (${this.applyFilters( dataQuery, filters ) || dataQuery}) 
+        AS filtered_data;`;
 
     let queryStr = `${countQuery + dataQuery}`;
         
@@ -36,7 +37,7 @@ class Payment extends Model {
     queryStr += `${this.getOrderClause(sorts)}`;
     queryStr += `${this.getLimitClause({ limit, skip })};`;
 
-    queryStr += this.applyFilters( summaryQuery, filters ) || summaryQuery + ';';
+    queryStr += summaryQuery;
 
     let dbRet = await this.directQuery(queryStr);
 
