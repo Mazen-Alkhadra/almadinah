@@ -97,6 +97,23 @@ let validators = {
     return { valid: true };
   },
 
+  addCashEntry: function ({ income, outcome }) {
+    if(!income && !outcome) 
+      return { valid: false };
+
+    return { valid: true };
+  },
+  updateCashEntry: function ({ cashEntryId }) {
+    if(!cashEntryId) 
+      return { valid: false };
+    return { valid: true };
+  },
+  deleteCashEntry: function ({ cashEntryId }) {
+    if(!cashEntryId) 
+      return { valid: false };
+    return { valid: true };
+  },
+
 };
 
 module.exports = validators;

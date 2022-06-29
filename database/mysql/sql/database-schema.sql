@@ -256,3 +256,21 @@ CREATE TABLE IF NOT EXISTS `payments` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table cash_entries
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `cash_entries` (
+  `id_cash_entry`       BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `serial_number`       BIGINT UNSIGNED NOT NULL,
+  `income`              DOUBLE NULL,
+  `outcome`             DOUBLE NULL,
+  `notic`               LONGTEXT NULL DEFAULT NULL,
+  `at`                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creat_at`            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id_cash_entry`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;

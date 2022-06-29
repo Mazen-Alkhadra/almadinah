@@ -4,5 +4,6 @@ module.exports = {
   customer: require('./customer'),
   bill: require('./bill'),
   payment: require('./payment'),
-  report: require('./report')
+  report: require('./report'),
+  cashEntry: require('./cash-entry')
 }

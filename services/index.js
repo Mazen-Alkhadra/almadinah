@@ -10,5 +10,6 @@ module.exports = {
   Bill: require('./bill'),
   Customer: require('./customer'),
   Payment: require('./payment'),
-  Report: require('./report')
+  Report: require('./report'),
+  cashEntry: require('./cash-entry')
 }
