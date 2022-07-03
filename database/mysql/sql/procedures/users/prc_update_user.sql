@@ -25,7 +25,7 @@ BEGIN
 		birth_date = IFNULL(p_birth_date, birth_date),
 		gender = IFNULL(p_gender, gender),
 		role_id = IFNULL(p_role_id, role_id),
-		img_id = IFNULL(p_img_id, fun_insert_img(p_img_url, NULL)),
+		img_id = IFNULL(p_img_url, fun_insert_img(p_img_url, NULL)),
 		is_active = IFNULL(p_is_active, is_active)
   WHERE 
     id_user = p_user_id
