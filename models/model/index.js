@@ -66,6 +66,8 @@ class Model {
 
   mapFilterToSqlClause(column, filterOp, filterVal) {
     filterVal = this.normalizeFilterVal(filterVal);
+    column = this.normalizeFilterColumn(column);
+    
     switch (filterOp) {
       case 'contains':
         return `${column} LIKE '%${filterVal}%'`;
@@ -163,6 +165,13 @@ class Model {
       return 0;
 
     return filterVal;
+  }
+
+  normalizeFilterColumn(filterCol) {
+    if (filterCol === 'at')
+      return 'DATE(at)';
+
+    return filterCol;
   }
 
   getOrderClause(sorts) {
