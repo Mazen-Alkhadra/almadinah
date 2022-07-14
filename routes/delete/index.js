@@ -3,4 +3,5 @@ module.exports = app => {
   require('./payment')(app);
   require('./bill')(app);
   require('./cash-entry')(app);
+  require('./withdraw')(app);
 };

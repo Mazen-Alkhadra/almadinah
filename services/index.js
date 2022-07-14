@@ -12,5 +12,6 @@ module.exports = {
   Payment: require('./payment'),
   Report: require('./report'),
   cashEntry: require('./cash-entry'),
-  ExportExcel: require('./export-xsls')
+  ExportExcel: require('./export-xsls'),
+  Withdraw: require('./withdraw')
 }

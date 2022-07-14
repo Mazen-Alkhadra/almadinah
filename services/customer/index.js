@@ -13,18 +13,22 @@ class Customer {
   }
 
   async addNewCustomer({
-    firstName, lastName, mobile, address
+    firstName, lastName, mobile, address,
+    canWithdrawFromCash
   }) {
     await this.customerModel.addNewCustomer({
-      firstName, lastName, mobile, address
+      firstName, lastName, mobile, address,
+      canWithdrawFromCash
     });
   }
 
   async updateCustomer({
-    customerId, firstName, lastName, mobile, address
+    customerId, firstName, lastName, mobile, address,
+    canWithdrawFromCash
   }) {
     await this.customerModel.updateCustomer({
-      customerId, firstName, lastName, mobile, address
+      customerId, firstName, lastName, mobile, address,
+      canWithdrawFromCash
     });
   }
 

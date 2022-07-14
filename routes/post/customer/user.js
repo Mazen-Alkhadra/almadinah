@@ -8,10 +8,12 @@ module.exports = app => {
 		validMiddleware(Validators.addCustomer),
 		async (req, res) => {
 			try {
-				const { firstName, lastName, mobile, address } = req.body;
+				const { firstName, lastName, mobile, address,
+					canWithdrawFromCash } = req.body;
 
 				await CustomerSvc.create().addNewCustomer({
-					firstName, lastName, mobile, address
+					firstName, lastName, mobile, address,
+					canWithdrawFromCash
 				});
 
 				res.status(200).end();
@@ -27,11 +29,11 @@ module.exports = app => {
 		async (req, res) => {
 			try {
 				const { customerId, firstName, lastName,
-					mobile, address } = req.body;
+					mobile, address, canWithdrawFromCash } = req.body;
 
 				await CustomerSvc.create().updateCustomer({
 					customerId, firstName, lastName,
-					mobile, address
+					mobile, address, canWithdrawFromCash
 				});
 
 				res.status(200).end();

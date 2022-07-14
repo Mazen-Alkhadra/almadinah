@@ -4,6 +4,7 @@ CREATE PROCEDURE `prc_add_customer` (
   p_last_name				              VARCHAR(50), 
   p_mobile                        VARCHAR(50),
   p_address                       VARCHAR(500),
+  p_can_Withdraw_from_cash        BOOLEAN,
   OUT out_customer_id             BIGINT UNSIGNED
 )  
 BEGIN
@@ -13,13 +14,15 @@ BEGIN
       first_name,
       last_name,
       mobile,
-      address
+      address,
+      can_Withdraw_from_cash
     )
   VALUES (
     p_first_name,
     p_last_name,
     p_mobile,
-    p_address
+    p_address,
+    IFNULL(p_can_Withdraw_from_cash, DEFAULT(can_Withdraw_from_cash))
   )
   ;
 

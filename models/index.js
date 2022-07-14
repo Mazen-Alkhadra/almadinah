@@ -5,5 +5,6 @@ module.exports = {
   bill: require('./bill'),
   payment: require('./payment'),
   report: require('./report'),
-  cashEntry: require('./cash-entry')
+  cashEntry: require('./cash-entry'),
+  Withdraw: require('./withdraw')
 }

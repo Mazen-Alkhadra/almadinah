@@ -7,6 +7,7 @@ module.exports = app => {
   require('./bill')(app);
   require('./report')(app);
   require('./cash-entry')(app);
+  require('./withdraw')(app);
 
   app.get('/*', (req, res) => {
     res.status(200).sendFile(

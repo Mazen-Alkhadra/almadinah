@@ -23,6 +23,7 @@ class Customer extends Model {
         CONCAT(first_name, ' ', last_name) fullName,
         mobile,
         address,
+        can_Withdraw_from_cash canWithdrawFromCash
         creat_at creatAt 
       FROM
         customers`;
@@ -44,22 +45,26 @@ class Customer extends Model {
   }
 
   async addNewCustomer({
-    firstName, lastName, mobile, address
+    firstName, lastName, mobile, address,
+    canWithdrawFromCash
   }) {
     let dbRet = await this.directQuery(
       'CALL prc_add_customer(?, @new_record_id);',
-      [firstName, lastName, mobile, address]
+      [firstName, lastName, mobile, address, 
+        canWithdrawFromCash]
     );
 
     return { newId: dbRet[0][0].newRecordId };
   }
 
   async updateCustomer({
-    customerId, firstName, lastName, mobile, address
+    customerId, firstName, lastName, mobile, address,
+    canWithdrawFromCash
   }) {
     await this.directQuery(
       'CALL prc_update_customer(?);',
-      [customerId, firstName, lastName, mobile, address]
+      [customerId, firstName, lastName, mobile, address, 
+        canWithdrawFromCash]
     );
   }
 

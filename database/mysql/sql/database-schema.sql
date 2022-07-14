@@ -179,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `last_name`				              VARCHAR(50) NOT NULL,
   `mobile`                        VARCHAR(50) NULL,
   `address`                       VARCHAR(500) NULL DEFAULT NULL,
+  `can_withdraw_from_cash`        BOOLEAN NOT NULL DEFAULT FALSE,
   `creat_at`                      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id_customer`)
@@ -271,6 +272,30 @@ CREATE TABLE IF NOT EXISTS `cash_entries` (
   `creat_at`            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id_cash_entry`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table withdraws
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `withdraws` (
+  `id_withdraw`           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `customer_id`           BIGINT UNSIGNED NULL DEFAULT NULL,
+  `serial_number`         BIGINT UNSIGNED NOT NULL,
+  `value`                 DOUBLE NOT NULL,
+  `notic`                 LONGTEXT NULL DEFAULT NULL,
+  `at`                    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creat_at`              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id_withdraw`),
+  
+  CONSTRAINT `fk_withdraw_customer`
+    FOREIGN KEY (`customer_id` )
+    REFERENCES `customers` (`id_customer`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

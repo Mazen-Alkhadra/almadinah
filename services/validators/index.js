@@ -118,6 +118,22 @@ let validators = {
     return { valid: true };
   },
 
+  addWithdraw: function ({ customerId }) {
+    if(!customerId) 
+      return { valid: false };
+
+    return { valid: true };
+  },
+  updateWithdraw: function ({ withdrawId }) {
+    if(!withdrawId) 
+      return { valid: false };
+    return { valid: true };
+  },
+  deleteWithdraw: function ({ withdrawId }) {
+    if(!withdrawId) 
+      return { valid: false };
+    return { valid: true };
+  },
 };
 
 module.exports = validators;
