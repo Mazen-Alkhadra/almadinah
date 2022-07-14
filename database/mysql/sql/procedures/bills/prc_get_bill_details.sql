@@ -9,11 +9,15 @@ BEGIN
     notic,
     at,
     customer_id customerId,
-    final_total finalTotal
+    CONCAT(first_name, ' ' , last_name) customerFullName,
+    final_total finalTotal,
+    serial_number serialNumber
   FROM
     bills
+    LEFT JOIN customers ON customer_id = id_customer
   WHERE 
     id_bill = p_bill_id
+    
   ;
 
   SELECT

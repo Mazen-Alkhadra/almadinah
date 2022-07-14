@@ -1,6 +1,8 @@
 const BillSvc = require('../../../services').Bill;
 const extractFilters = require('../../../middlewares/filters');
 const extractSorts = require('../../../middlewares/sorts');
+const ExportExcelSvc = require('../../../services').ExportExcel;
+const fs = require('fs');
 
 module.exports = app => {
 
@@ -44,4 +46,26 @@ module.exports = app => {
 			}
 		}
 	);
+
+	app.get(`/api/user/bill/:billId/export/excel`,
+		async (req, res) => {
+			try {
+				let {fileBuf, fileName} = await ExportExcelSvc.create().exportBill({
+					billId: req.params.billId
+				});
+
+				res.setHeader (
+					'Content-Disposition', 
+					`inline; filename="${fileName}"`
+				);
+
+				res.status(200).end(fileBuf);
+
+			} catch (err) {
+				res.internalError = err;
+				res.status(500).end();
+			}
+		}
+	);
+
 };

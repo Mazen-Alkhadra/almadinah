@@ -38,9 +38,9 @@ module.exports = {
   },
 
   ftp: {
-    host: 'ftp.scacademy.no',
-    user: 'ss-6d5c52db07257210@scacademy.no',
-    password: 'mM@12345'
+    host: '',
+    user: '',
+    password: ''
   },
 
   uploads: {
