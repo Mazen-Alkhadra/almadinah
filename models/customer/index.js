@@ -23,7 +23,7 @@ class Customer extends Model {
         CONCAT(first_name, ' ', last_name) fullName,
         mobile,
         address,
-        can_Withdraw_from_cash canWithdrawFromCash
+        can_Withdraw_from_cash canWithdrawFromCash,
         creat_at creatAt 
       FROM
         customers`;
