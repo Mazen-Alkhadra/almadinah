@@ -180,6 +180,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `mobile`                        VARCHAR(50) NULL,
   `address`                       VARCHAR(500) NULL DEFAULT NULL,
   `can_withdraw_from_cash`        BOOLEAN NOT NULL DEFAULT FALSE,
+  `serial_number`                 BIGINT UNSIGNED NOT NULL,
   `creat_at`                      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id_customer`)

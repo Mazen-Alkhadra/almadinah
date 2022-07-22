@@ -24,6 +24,7 @@ class Customer extends Model {
         mobile,
         address,
         can_Withdraw_from_cash canWithdrawFromCash,
+        serial_number serialNumber,
         creat_at creatAt 
       FROM
         customers`;
@@ -46,12 +47,12 @@ class Customer extends Model {
 
   async addNewCustomer({
     firstName, lastName, mobile, address,
-    canWithdrawFromCash
+    canWithdrawFromCash, serialNumber
   }) {
     let dbRet = await this.directQuery(
       'CALL prc_add_customer(?, @new_record_id);',
       [firstName, lastName, mobile, address, 
-        canWithdrawFromCash]
+        canWithdrawFromCash, serialNumber]
     );
 
     return { newId: dbRet[0][0].newRecordId };
