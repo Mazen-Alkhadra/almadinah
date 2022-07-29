@@ -1,2 +1,0 @@
-(this.webpackJsonpal_madinah=this.webpackJsonpal_madinah||[]).push([[19],{933:function(t,a,e){"use strict";e.r(a);e(0);var n=e(710),c=e(709),s=e(700),i=e(1);a.default=Object(s.a)()((function(t){var a=t.t;return Object(i.jsx)(n.a,{textAlign:"center",children:Object(i.jsx)(c.a,{as:"h3",color:"teal",content:a("WelcomeToOb")})})}))}}]);
-//# sourceMappingURL=19.a6355afb.chunk.js.map
