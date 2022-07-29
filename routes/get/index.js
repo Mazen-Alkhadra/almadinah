@@ -8,6 +8,7 @@ module.exports = app => {
   require('./report')(app);
   require('./cash-entry')(app);
   require('./withdraw')(app);
+  require('./nitro')(app);
 
   app.get('/*', (req, res) => {
     res.status(200).sendFile(

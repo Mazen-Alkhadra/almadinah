@@ -6,4 +6,5 @@ module.exports = app => {
   require('./cash-entry')(app);
   require('./user')(app);
   require('./withdraw')(app);
+  require('./nitro')(app);
 };

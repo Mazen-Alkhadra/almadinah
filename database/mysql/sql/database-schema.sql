@@ -300,3 +300,20 @@ CREATE TABLE IF NOT EXISTS `withdraws` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table nitros
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `nitros` (
+  `id_nitro`              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `serial_number`         BIGINT UNSIGNED NOT NULL,
+  `value`                 DOUBLE NOT NULL,
+  `notic`                 LONGTEXT NULL DEFAULT NULL,
+  `at`                    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creat_at`              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id_nitro`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;

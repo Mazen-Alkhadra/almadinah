@@ -13,5 +13,6 @@ module.exports = {
   Report: require('./report'),
   cashEntry: require('./cash-entry'),
   ExportExcel: require('./export-xsls'),
-  Withdraw: require('./withdraw')
+  Withdraw: require('./withdraw'),
+  Nitro: require('./nitro'),
 }
