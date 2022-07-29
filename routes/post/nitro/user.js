@@ -25,7 +25,7 @@ module.exports = app => {
 			try {
 				const { nitroId, notic, serialNumber, at, value } = req.body;
 
-				await WithdrawSvc.create().update({
+				await NitroSvc.create().update({
 					nitroId, notic, serialNumber, at, value
 				});
 
